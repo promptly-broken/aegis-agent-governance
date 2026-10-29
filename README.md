@@ -101,10 +101,66 @@ source .venv/bin/activate
 uv pip install -e ".[dev]"
 ```
 
-### Running Tests
+### Aegis Control Plane CLI
+
+Aegis includes a built-in command-line tool `aegis` to inspect, profile, and evaluate agent trajectories:
 
 ```bash
+# 1. Run the Multi-Agent Marketplace Dispute Benchmark and print the Executive Report
+uv run aegis report
+
+# 2. Audit Model Context Protocol (MCP) Token Amplification Factor (TAF)
+uv run aegis profile-mcp --turns 5 --payload-bytes 1024
+
+# 3. Interactively score task entropy and route prompt to optimal tier (Apple Silicon vs Cloud)
+uv run aegis route "Extract customer ID and order number from JSON schema"
+
+# 4. Enforce CI/CD governance gate on a recorded trajectory file
+uv run aegis eval -f path/to/trajectory.json --min-tdi 0.85 --max-ecrt 0.05 --strict
+```
+
+### Runtime Telemetry & Circuit Breaker Usage
+
+```python
+from aegis.core.tracer import AegisTracer
+from aegis.finops.circuit_breaker import CircuitBreaker, CircuitBreakerConfig, CircuitBreakerTrip
+
+# 1. Configure circuit breaker with runaway cycle and SLA budget caps
+config = CircuitBreakerConfig(max_cost_usd=0.05, max_cycle_repetitions=2)
+tracer = AegisTracer(scenario_id="customer_dispute", circuit_breaker=CircuitBreaker(config))
+
+# 2. Execute and trace agent actions
+with tracer:
+    with tracer.span("reasoning_step") as s:
+        s.record_tokens(prompt_tokens=450, completion_tokens=120)
+
+    # Automatically guarded: repeating tool cycles trips CircuitBreakerTrip
+    t1 = tracer.record_tool_call("db_query", arguments={"user": 42})
+    t2 = tracer.record_tool_call("api_lookup", depends_on=[t1.node_id])
+
+    tracer.mark_resolved(True)
+
+# 3. Access finalized Trajectory DAG with exact NetworkX representation & cost
+dag = tracer.get_trajectory()
+print(f"Total Trajectory Cost: ${dag.total_cost_usd():.5f}")
+```
+
+### Live End-to-End Demo
+
+Execute the live demonstration scenario showcasing real-time circuit breaker trip interception, hybrid router arbitrage, and MCP pointer persistence:
+
+```bash
+uv run python examples/live_governed_agent.py
+```
+
+### Running the Test Suite
+
+```bash
+# Run all 64 comprehensive unit and property tests
 uv run pytest -v
+
+# Run with test coverage
+uv run pytest --cov=aegis
 ```
 
 ---
@@ -112,3 +168,4 @@ uv run pytest -v
 ## License
 
 Apache-2.0 License. See LICENSE for details.
+
