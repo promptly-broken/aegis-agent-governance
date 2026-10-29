@@ -156,7 +156,7 @@ uv run python examples/live_governed_agent.py
 ### Running the Test Suite
 
 ```bash
-# Run all 64 comprehensive unit and property tests
+# Run all 70 comprehensive unit and property tests
 uv run pytest -v
 
 # Run with test coverage

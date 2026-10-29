@@ -162,7 +162,9 @@ class RedisMCPStateStore(BaseMCPStateStore):
         if not self.is_connected or self._redis_client is None:
             return self._fallback_memory.update_delta(session_id, delta)
 
-        existing = self.load_state(session_id) or {}
+        key = f"mcp:session:{session_id}"
+        raw = self._redis_client.get(key)
+        existing: Dict[str, Any] = json.loads(raw) if raw else {}
         merged = {**existing, **delta}
         pointer, metrics = self.save_state(session_id, merged)
         return pointer, merged, metrics

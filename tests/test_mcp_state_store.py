@@ -68,3 +68,52 @@ def test_redis_mcp_state_store_fallback():
     ptr2, merged, m2 = store.update_delta(session_id, {"count": 43})
     assert merged["count"] == 43
     assert store.load_state(ptr2) == merged
+
+
+class _FakeRedisPipeline:
+    def __init__(self, backing_dict: dict):
+        self._backing = backing_dict
+        self._ops = []
+
+    def set(self, key: str, value: str, ex: int | None = None):
+        self._ops.append((key, value))
+        return self
+
+    def execute(self):
+        for k, v in self._ops:
+            self._backing[k] = v
+        self._ops.clear()
+        return True
+
+
+class _FakeRedisClient:
+    def __init__(self):
+        self.data = {}
+
+    def pipeline(self):
+        return _FakeRedisPipeline(self.data)
+
+    def get(self, key: str):
+        return self.data.get(key)
+
+
+def test_redis_mcp_state_store_connected():
+    store = RedisMCPStateStore(redis_url="redis://127.0.0.1:59999/0")
+    fake_client = _FakeRedisClient()
+    store._redis_client = fake_client
+    store.is_connected = True
+
+    session_id = "live_redis_sess"
+    initial_state = {"dispute_id": 101, "stage": "intake"}
+
+    ptr1, m1 = store.save_state(session_id, initial_state)
+    assert ptr1.startswith(f"urn:mcp:state:{session_id}:")
+    assert m1.payload_bytes > 0
+    assert store.load_state(ptr1) == initial_state
+    assert store.load_state("urn:mcp:state:missing:0000") is None
+
+    # Verify update_delta reads mcp:session:{session_id} and merges state
+    ptr2, merged, m2 = store.update_delta(session_id, {"stage": "resolved", "refund": 50.0})
+    assert ptr2 != ptr1
+    assert merged == {"dispute_id": 101, "stage": "resolved", "refund": 50.0}
+    assert store.load_state(ptr2) == merged

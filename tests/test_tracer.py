@@ -106,3 +106,61 @@ def test_tracer_circuit_breaker_trips_on_token_velocity():
         tracer.record_llm_call("step2", "gpt-4o", prompt_tokens=300, completion_tokens=300)
 
     assert exc_info.value.reason == BreakerTripReason.TOKEN_VELOCITY_BREACHED
+
+
+def test_tracer_nested_span_hierarchy():
+    tracer = AegisTracer(scenario_id="nested_spans")
+    assert tracer.active_span_id is None
+
+    with tracer.span("root_orchestrator", SpanType.ROUTER_DECISION) as root_span:
+        assert tracer.active_span_id == root_span.span_id
+        assert root_span.parent_span_id is None
+
+        with tracer.span("child_reasoning", SpanType.INTERNAL_REASONING) as child_span:
+            assert tracer.active_span_id == child_span.span_id
+            assert child_span.parent_span_id == root_span.span_id
+
+            llm_span = tracer.record_llm_call(
+                name="nested_llm_call",
+                model_name="gpt-4o",
+                prompt_tokens=120,
+                completion_tokens=40,
+            )
+            assert llm_span.parent_span_id == child_span.span_id
+
+        # Back to root span after child exits
+        assert tracer.active_span_id == root_span.span_id
+
+    # Stack empty after root exits
+    assert tracer.active_span_id is None
+
+    dag = tracer.get_trajectory()
+    spans_by_name = {s.name: s for s in dag.spans}
+    assert spans_by_name["root_orchestrator"].parent_span_id is None
+    assert spans_by_name["child_reasoning"].parent_span_id == root_span.span_id
+    assert spans_by_name["nested_llm_call"].parent_span_id == child_span.span_id
+
+
+@pytest.mark.asyncio
+async def test_tracer_async_concurrent_spans():
+    import asyncio
+
+    tracer = AegisTracer(scenario_id="async_concurrent")
+
+    async def worker(branch_name: str) -> tuple[str, str]:
+        async with tracer.span(f"parent_{branch_name}", SpanType.ROUTER_DECISION) as p_span:
+            await asyncio.sleep(0.005)
+            async with tracer.span(f"child_{branch_name}", SpanType.INTERNAL_REASONING) as c_span:
+                await asyncio.sleep(0.005)
+                assert c_span.parent_span_id == p_span.span_id
+                return p_span.span_id, c_span.span_id
+
+    async with tracer:
+        (p1, c1), (p2, c2) = await asyncio.gather(worker("alpha"), worker("beta"))
+
+    dag = tracer.get_trajectory()
+    spans_by_id = {s.span_id: s for s in dag.spans}
+    assert spans_by_id[p1].parent_span_id is None
+    assert spans_by_id[c1].parent_span_id == p1
+    assert spans_by_id[p2].parent_span_id is None
+    assert spans_by_id[c2].parent_span_id == p2

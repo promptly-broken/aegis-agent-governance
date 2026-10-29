@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
+import contextvars
 import time
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import uuid
 
 from aegis.core.models import (
@@ -19,7 +20,7 @@ from aegis.finops.circuit_breaker import CircuitBreaker
 
 
 class SpanContext:
-    """Active execution span context manager."""
+    """Active execution span context manager (supports sync and async contexts)."""
 
     def __init__(
         self,
@@ -35,7 +36,8 @@ class SpanContext:
         self.span_type = span_type
         self.model_name = model_name
         self.model_tier = model_tier
-        self.parent_span_id = parent_span_id
+        self._explicit_parent_span_id = parent_span_id
+        self.parent_span_id: Optional[str] = parent_span_id
         self.span_id = str(uuid.uuid4())
         self.start_time_ms = 0.0
         self.prompt_tokens = 0
@@ -43,6 +45,7 @@ class SpanContext:
         self.ttft_ms: Optional[float] = None
         self.attributes: Dict[str, Any] = {}
         self.error: Optional[str] = None
+        self._ctx_token: Optional[contextvars.Token[Tuple[str, ...]]] = None
 
     def record_tokens(self, prompt_tokens: int, completion_tokens: int) -> None:
         """Update token counts for this span."""
@@ -59,9 +62,17 @@ class SpanContext:
 
     def __enter__(self) -> "SpanContext":
         self.start_time_ms = time.time() * 1000.0
+        stack = self.tracer._span_stack_var.get()
+        if self._explicit_parent_span_id is None:
+            self.parent_span_id = stack[-1] if stack else None
+        self._ctx_token = self.tracer._span_stack_var.set((*stack, self.span_id))
         return self
 
     def __exit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        if self._ctx_token is not None:
+            self.tracer._span_stack_var.reset(self._ctx_token)
+            self._ctx_token = None
+
         end_time_ms = time.time() * 1000.0
         if exc_val is not None:
             self.error = str(exc_val)
@@ -96,6 +107,12 @@ class SpanContext:
         if self.tracer.circuit_breaker:
             self.tracer.circuit_breaker.guard(self.tracer.trajectory)
 
+    async def __aenter__(self) -> "SpanContext":
+        return self.__enter__()
+
+    async def __aexit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        self.__exit__(exc_type, exc_val, exc_tb)
+
 
 class AegisTracer:
     """High-level telemetry tracer capturing DAG transitions and checking live governance SLAs."""
@@ -114,7 +131,20 @@ class AegisTracer:
         )
         self.circuit_breaker = circuit_breaker
         self.pricing_registry = pricing_registry or PricingRegistry()
-        self._active_span_id: Optional[str] = None
+        self._span_stack_var: contextvars.ContextVar[Tuple[str, ...]] = contextvars.ContextVar(
+            f"aegis_span_stack_{self.trajectory.trajectory_id}", default=()
+        )
+
+    @property
+    def active_span_id(self) -> Optional[str]:
+        """Return the currently active span ID in the execution context, if any."""
+        stack = self._span_stack_var.get()
+        return stack[-1] if stack else None
+
+    @property
+    def _active_span_id(self) -> Optional[str]:
+        """Backwards-compatible alias for active_span_id."""
+        return self.active_span_id
 
     def __enter__(self) -> "AegisTracer":
         return self
@@ -123,12 +153,19 @@ class AegisTracer:
         if exc_val is not None:
             self.trajectory.metadata["error"] = str(exc_val)
 
+    async def __aenter__(self) -> "AegisTracer":
+        return self.__enter__()
+
+    async def __aexit__(self, exc_type: Any, exc_val: Any, exc_tb: Any) -> None:
+        self.__exit__(exc_type, exc_val, exc_tb)
+
     def span(
         self,
         name: str,
         span_type: SpanType = SpanType.INTERNAL_REASONING,
         model_name: Optional[str] = None,
         model_tier: Optional[ModelTier] = None,
+        parent_span_id: Optional[str] = None,
     ) -> SpanContext:
         """Create a managed execution span context manager."""
         return SpanContext(
@@ -137,7 +174,7 @@ class AegisTracer:
             span_type=span_type,
             model_name=model_name,
             model_tier=model_tier,
-            parent_span_id=self._active_span_id,
+            parent_span_id=parent_span_id,
         )
 
     def record_tool_call(
@@ -182,6 +219,7 @@ class AegisTracer:
         model_tier: Optional[ModelTier] = None,
         ttft_ms: Optional[float] = None,
         attributes: Optional[Dict[str, Any]] = None,
+        parent_span_id: Optional[str] = None,
     ) -> Span:
         """Record a single LLM inference call with automatic pricing resolution."""
         pricing = self.pricing_registry.get(model_name)
@@ -199,6 +237,7 @@ class AegisTracer:
 
         span = Span(
             name=name,
+            parent_span_id=parent_span_id if parent_span_id is not None else self.active_span_id,
             span_type=SpanType.LLM_INFERENCE,
             model_tier=tier,
             model_name=model_name,
