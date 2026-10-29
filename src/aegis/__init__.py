@@ -17,7 +17,14 @@ from aegis.eval_engine.sprt import (
     SequentialProbabilityRatioTest,
 )
 from aegis.eval_engine.tdi import TDIResult, compute_tdi
+from aegis.exporters import JSONLAuditExporter, OTLPTraceExporter
 from aegis.finops.ecrt import ECRTResult, compute_ecrt
+from aegis.integrations import (
+    GovernedMCPSessionProxy,
+    LangGraphGovernanceCallback,
+    OpenAIAgentsGovernanceHooks,
+    governed_tool,
+)
 
 __all__ = [
     "__version__",
@@ -36,4 +43,10 @@ __all__ = [
     "SPRTResult",
     "compute_ecrt",
     "ECRTResult",
+    "OTLPTraceExporter",
+    "JSONLAuditExporter",
+    "governed_tool",
+    "LangGraphGovernanceCallback",
+    "OpenAIAgentsGovernanceHooks",
+    "GovernedMCPSessionProxy",
 ]

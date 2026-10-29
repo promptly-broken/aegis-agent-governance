@@ -12,6 +12,7 @@ from aegis.core.models import TrajectoryDAG
 from aegis.core.pricing import PricingRegistry
 from aegis.eval_engine.sprt import SequentialProbabilityRatioTest
 from aegis.eval_engine.tdi import compute_tdi
+from aegis.exporters import JSONLAuditExporter, OTLPTraceExporter
 from aegis.finops.ecrt import compute_ecrt
 from aegis.finops.router import HybridComplexityRouter
 from aegis.mcp_profiler.amplification import MCPAmplificationAuditor
@@ -158,6 +159,58 @@ def cmd_route(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_export(args: argparse.Namespace) -> int:
+    """Export trajectory file to OpenTelemetry (OTLP/JSON) or JSONL audit format."""
+    file_path = Path(args.file)
+    if not file_path.exists():
+        print(f"Error: Trajectory file '{file_path}' does not exist.", file=sys.stderr)
+        return 2
+
+    try:
+        raw_data = json.loads(file_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        print(f"Error reading JSON from '{file_path}': {exc}", file=sys.stderr)
+        return 2
+
+    trajectories: List[TrajectoryDAG] = []
+    if isinstance(raw_data, list):
+        for item in raw_data:
+            trajectories.append(TrajectoryDAG.model_validate(item))
+    elif isinstance(raw_data, dict):
+        trajectories.append(TrajectoryDAG.model_validate(raw_data))
+    else:
+        print("Error: Input file must be a JSON object or array of TrajectoryDAGs.", file=sys.stderr)
+        return 2
+
+    registry = PricingRegistry()
+    ecrt_res = compute_ecrt(trajectories, pricing_registry=registry)
+    tdi_res = compute_tdi(trajectories) if len(trajectories) >= 2 else None
+
+    if args.format == "otlp":
+        exporter = OTLPTraceExporter()
+        if args.output:
+            out = exporter.export_to_file(
+                args.output, trajectories, tdi_result=tdi_res, ecrt_result=ecrt_res
+            )
+            print(f"OTLP trace payload written to: {out.resolve()}", file=sys.stderr)
+        else:
+            payload = exporter.to_otlp_payload(
+                trajectories, tdi_result=tdi_res, ecrt_result=ecrt_res
+            )
+            print(json.dumps(payload, indent=2))
+    else:
+        if not args.output:
+            print("Error: --output (-o) is required when exporting to jsonl format.", file=sys.stderr)
+            return 2
+        jsonl_exporter = JSONLAuditExporter(args.output)
+        count = jsonl_exporter.export_batch(
+            trajectories, tdi_result=tdi_res, ecrt_result=ecrt_res
+        )
+        print(f"Exported {count} trajectory record(s) to JSONL: {Path(args.output).resolve()}", file=sys.stderr)
+
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Construct command-line argument parser."""
     parser = argparse.ArgumentParser(
@@ -198,6 +251,18 @@ def build_parser() -> argparse.ArgumentParser:
     p_route.add_argument("prompt", help="Prompt or task instruction string to route")
     p_route.add_argument("--task-type", help="Optional task categorization hint")
     p_route.set_defaults(func=cmd_route)
+
+    # export
+    p_export = subparsers.add_parser("export", help="Export trajectory telemetry to OTLP JSON or JSONL")
+    p_export.add_argument("-f", "--file", required=True, help="Path to JSON trajectory DAG or array")
+    p_export.add_argument(
+        "--format",
+        choices=["otlp", "jsonl"],
+        default="otlp",
+        help="Target telemetry export format (default: otlp)",
+    )
+    p_export.add_argument("-o", "--output", help="Output file path")
+    p_export.set_defaults(func=cmd_export)
 
     return parser
 

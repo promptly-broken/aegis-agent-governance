@@ -35,6 +35,12 @@ Repository: `https://github.com/promptly-broken/aegis-agent-governance`
 5. **`aegis.pytest_plugin` — Automated CI/CD Regression Gates**
    - Decorate async agent tests with `@assert_agent_governance(min_tdi=0.85, max_ecrt_usd=0.015, max_loops=2)` to block regressions in GitHub Actions.
 
+6. **`aegis.integrations` — Framework Middleware & Auto-Instrumentation**
+   - Drop-in callbacks and interceptors for **LangGraph** (`LangGraphGovernanceCallback`), **OpenAI Agents SDK** (`OpenAIAgentsGovernanceHooks`), **MCP Client Sessions** (`GovernedMCPSessionProxy`), and function tools (`@governed_tool`).
+
+7. **`aegis.exporters` — OpenTelemetry (OTLP/JSON) & JSONL Audit Exporters**
+   - Export governed `TrajectoryDAG` traces, TDI scores, and ECRT metrics to **OpenTelemetry (`OTLPTraceExporter`)** (compatible with Arize Phoenix, Langfuse, and Jaeger) and append-only **JSONL compliance logs (`JSONLAuditExporter`)**.
+
 ---
 
 ## Directory Layout
@@ -117,6 +123,10 @@ uv run aegis route "Extract customer ID and order number from JSON schema"
 
 # 4. Enforce CI/CD governance gate on a recorded trajectory file
 uv run aegis eval -f path/to/trajectory.json --min-tdi 0.85 --max-ecrt 0.05 --strict
+
+# 5. Export trajectories to OpenTelemetry (OTLP/JSON) or JSONL audit trails
+uv run aegis export -f path/to/trajectory.json --format otlp -o traces_otlp.json
+uv run aegis export -f path/to/trajectory.json --format jsonl -o audit_log.jsonl
 ```
 
 ### Runtime Telemetry & Circuit Breaker Usage
@@ -156,7 +166,7 @@ uv run python examples/live_governed_agent.py
 ### Running the Test Suite
 
 ```bash
-# Run all 70 comprehensive unit and property tests
+# Run all 79 comprehensive unit and property tests
 uv run pytest -v
 
 # Run with test coverage
