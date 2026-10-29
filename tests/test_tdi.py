@@ -78,3 +78,37 @@ def test_tdi_bounded_range():
     assert 0.0 <= res.tdi <= 1.0
     assert 0.0 <= res.mean_normalized_distance <= 1.0
     assert res.variance >= 0.0
+
+
+def test_tdi_semantic_argument_value_drift():
+    # Identical tool names and identical argument keys, but divergent argument values
+    t_exact_1 = create_linear_trajectory(
+        "t1",
+        [
+            ("issue_refund", {"order_id": "ORD-100", "amount": 50.0, "meta": {"tier": "gold"}}),
+        ],
+    )
+    t_exact_2 = create_linear_trajectory(
+        "t2",
+        [
+            ("issue_refund", {"order_id": "ORD-100", "amount": 50.0, "meta": {"tier": "gold"}}),
+        ],
+    )
+    t_value_drift = create_linear_trajectory(
+        "t3",
+        [
+            ("issue_refund", {"order_id": "ORD-999", "amount": 5000.0, "meta": {"tier": "bronze"}}),
+        ],
+    )
+
+    assert compute_tdi([t_exact_1, t_exact_2]).tdi == 1.0
+
+    # With value distance enabled (default), divergent values lower TDI below 1.0
+    res_with_val = compute_tdi([t_exact_1, t_value_drift], include_value_distance=True)
+    assert 0.70 <= res_with_val.tdi < 1.0
+    assert res_with_val.tdi_score == res_with_val.tdi
+
+    # With value distance disabled (schema-keys-only mode), TDI is 1.0 since keys match
+    res_keys_only = compute_tdi([t_exact_1, t_value_drift], include_value_distance=False)
+    assert res_keys_only.tdi == 1.0
+

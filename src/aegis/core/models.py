@@ -155,6 +155,7 @@ class TrajectoryDAG(BaseModel):
             graph.add_node(
                 node_id,
                 tool_name=node.tool_name,
+                arguments=node.arguments,
                 schema_keys=node.schema_keys,
                 status=node.status,
                 duration_ms=node.duration_ms,
@@ -182,6 +183,7 @@ class TrajectoryDAG(BaseModel):
         nodes: Dict[str, ToolNode] = {}
         for n, data in graph.nodes(data=True):
             tool_name = data.get("tool_name", "unknown_tool")
+            arguments = data.get("arguments", {})
             schema_keys = data.get("schema_keys", [])
             status = data.get("status", "success")
             duration_ms = data.get("duration_ms", 0.0)
@@ -189,6 +191,7 @@ class TrajectoryDAG(BaseModel):
             nodes[str(n)] = ToolNode(
                 node_id=str(n),
                 tool_name=tool_name,
+                arguments=arguments,
                 schema_keys=schema_keys,
                 status=status,
                 duration_ms=duration_ms,

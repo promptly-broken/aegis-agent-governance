@@ -7,7 +7,7 @@ from aegis.cli import main as cli_main
 from aegis.core.models import ModelTier, SpanType
 from aegis.core.tracer import AegisTracer
 from aegis.eval_engine.tdi import compute_tdi
-from aegis.exporters import JSONLAuditExporter, OTLPTraceExporter
+from aegis.exporters import HTMLDashboardExporter, JSONLAuditExporter, OTLPTraceExporter
 from aegis.finops.ecrt import compute_ecrt
 
 
@@ -129,4 +129,26 @@ def test_cli_export_otlp_and_jsonl(tmp_path: Path):
     reloaded = JSONLAuditExporter(jsonl_out).load_trajectories()
     assert len(reloaded) == 1
     assert reloaded[0].scenario_id == "cli_export_scenario"
+
+
+def test_html_dashboard_exporter_and_cli(tmp_path: Path):
+    dag = _build_sample_trajectory("dashboard_test")
+    dash = HTMLDashboardExporter(title="Aegis Custom Dashboard")
+    out_html = tmp_path / "dashboard.html"
+    dash.export_to_file(out_html, [dag])
+
+    assert out_html.exists()
+    content = out_html.read_text(encoding="utf-8")
+    assert "<!DOCTYPE html>" in content
+    assert "Aegis Custom Dashboard" in content
+    assert "fetch_order" in content
+
+    cli_dash_out = tmp_path / "cli_dashboard.html"
+    rc = cli_main(["dashboard", "-o", str(cli_dash_out)])
+    assert rc == 0
+    assert cli_dash_out.exists()
+    cli_html = cli_dash_out.read_text(encoding="utf-8")
+    assert "Runaway Negotiation Loop Stress Test" in cli_html
+    assert "Hybrid SQL &amp; Schema Pipeline" in cli_html
+
 

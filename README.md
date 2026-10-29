@@ -115,6 +115,9 @@ Aegis includes a built-in command-line tool `aegis` to inspect, profile, and eva
 # 1. Run the Multi-Agent Marketplace Dispute Benchmark and print the Executive Report
 uv run aegis report
 
+# 2. Generate the Interactive HTML Governance & FinOps Dashboard
+uv run aegis dashboard -o aegis_dashboard.html
+
 # 2. Audit Model Context Protocol (MCP) Token Amplification Factor (TAF)
 uv run aegis profile-mcp --turns 5 --payload-bytes 1024
 
@@ -166,7 +169,7 @@ uv run python examples/live_governed_agent.py
 ### Running the Test Suite
 
 ```bash
-# Run all 79 comprehensive unit and property tests
+# Run all 84 comprehensive unit and property tests
 uv run pytest -v
 
 # Run with test coverage

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from difflib import SequenceMatcher
 import itertools
 import math
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
@@ -27,9 +28,59 @@ class TDIResult(BaseModel):
     num_trajectories: int = Field(..., ge=1)
     is_deterministic: bool = Field(description="Whether TDI meets or exceeds target threshold")
 
+    @property
+    def tdi_score(self) -> float:
+        """Backwards-compatible alias for `tdi`."""
+        return self.tdi
 
-def _node_subst_cost(node1_attr: Dict[str, Any], node2_attr: Dict[str, Any]) -> float:
-    """Calculate substitution cost between two tool nodes."""
+
+def _argument_value_distance(val1: Any, val2: Any) -> float:
+    """Compute normalized semantic distance in [0.0, 1.0] between two tool argument values."""
+    if type(val1) is type(val2) and val1 == val2:
+        return 0.0
+    if isinstance(val1, bool) or isinstance(val2, bool):
+        return 0.0 if val1 is val2 else 1.0
+    if isinstance(val1, (int, float)) and isinstance(val2, (int, float)):
+        if val1 == val2:
+            return 0.0
+        denom = max(abs(float(val1)), abs(float(val2)), 1e-9)
+        return min(1.0, abs(float(val1) - float(val2)) / denom)
+    if isinstance(val1, str) and isinstance(val2, str):
+        if val1 == val2:
+            return 0.0
+        return max(0.0, min(1.0, 1.0 - SequenceMatcher(None, val1, val2).ratio()))
+    if isinstance(val1, dict) and isinstance(val2, dict):
+        k1, k2 = set(val1.keys()), set(val2.keys())
+        if not k1 and not k2:
+            return 0.0
+        union = len(k1 | k2)
+        shared = k1 & k2
+        key_dist = 1.0 - (len(shared) / union)
+        val_dist = (
+            sum(_argument_value_distance(val1[k], val2[k]) for k in shared) / len(shared)
+            if shared
+            else 1.0
+        )
+        return 0.5 * key_dist + 0.5 * val_dist
+    if isinstance(val1, (list, tuple)) and isinstance(val2, (list, tuple)):
+        if not val1 and not val2:
+            return 0.0
+        max_len = max(len(val1), len(val2))
+        min_len = min(len(val1), len(val2))
+        elem_dist = (
+            sum(_argument_value_distance(val1[i], val2[i]) for i in range(min_len)) / max_len
+        )
+        len_penalty = (max_len - min_len) / max_len
+        return min(1.0, elem_dist + len_penalty)
+    return 1.0
+
+
+def _node_subst_cost(
+    node1_attr: Dict[str, Any],
+    node2_attr: Dict[str, Any],
+    include_value_distance: bool = True,
+) -> float:
+    """Calculate substitution cost between two tool nodes combining schema key and value drift."""
     tool1 = node1_attr.get("tool_name", "")
     tool2 = node2_attr.get("tool_name", "")
 
@@ -37,24 +88,38 @@ def _node_subst_cost(node1_attr: Dict[str, Any], node2_attr: Dict[str, Any]) -> 
         return 1.0
 
     # Same tool: compare schema keys using Jaccard distance
-    keys1 = set(node1_attr.get("schema_keys", []))
-    keys2 = set(node2_attr.get("schema_keys", []))
+    args1 = node1_attr.get("arguments") or {}
+    args2 = node2_attr.get("arguments") or {}
+    keys1 = set(node1_attr.get("schema_keys") or args1.keys())
+    keys2 = set(node2_attr.get("schema_keys") or args2.keys())
 
     if not keys1 and not keys2:
         return 0.0
 
-    intersection = len(keys1.intersection(keys2))
+    intersection_keys = keys1.intersection(keys2)
     union = len(keys1.union(keys2))
 
     if union == 0:
         return 0.0
 
-    jaccard_distance = 1.0 - (intersection / union)
-    # Weight schema key divergence by 0.5 when tool names match
-    return 0.5 * jaccard_distance
+    jaccard_distance = 1.0 - (len(intersection_keys) / union)
+
+    if not include_value_distance or not intersection_keys or not (args1 and args2):
+        return 0.5 * jaccard_distance
+
+    shared_val_dist = sum(
+        _argument_value_distance(args1.get(k), args2.get(k)) for k in intersection_keys
+    ) / len(intersection_keys)
+
+    if jaccard_distance == 0.0:
+        return 0.25 * shared_val_dist
+
+    return (0.35 * jaccard_distance) + (0.15 * shared_val_dist)
 
 
-def _fast_dag_edit_distance(g1: nx.DiGraph, g2: nx.DiGraph) -> float:
+def _fast_dag_edit_distance(
+    g1: nx.DiGraph, g2: nx.DiGraph, include_value_distance: bool = True
+) -> float:
     """Fast bipartite node-matching and edge-difference approximation for Graph Edit Distance.
 
     Uses Hungarian matching (linear sum assignment) on cost matrix followed by edge symmetric difference.
@@ -78,7 +143,9 @@ def _fast_dag_edit_distance(g1: nx.DiGraph, g2: nx.DiGraph) -> float:
     for i in range(max_dim):
         for j in range(max_dim):
             if i < n1 and j < n2:
-                cost_matrix[i, j] = _node_subst_cost(nodes1[i][1], nodes2[j][1])
+                cost_matrix[i, j] = _node_subst_cost(
+                    nodes1[i][1], nodes2[j][1], include_value_distance=include_value_distance
+                )
             elif i < n1 and j >= n2:
                 # Deletion cost from g1
                 cost_matrix[i, j] = 1.0
@@ -120,6 +187,7 @@ def compute_dag_edit_distance(
     g2: nx.DiGraph,
     exact: bool = False,
     timeout_seconds: Optional[float] = 1.0,
+    include_value_distance: bool = True,
 ) -> float:
     """Calculate Graph Edit Distance between two trajectory DAGs."""
     # Check isomorphism first for fast path
@@ -132,7 +200,9 @@ def compute_dag_edit_distance(
             ged_iter = nx.graph_edit_distance(
                 g1,
                 g2,
-                node_subst_cost=lambda a, b: _node_subst_cost(a, b),
+                node_subst_cost=lambda a, b: _node_subst_cost(
+                    a, b, include_value_distance=include_value_distance
+                ),
                 node_del_cost=lambda a: 1.0,
                 node_ins_cost=lambda a: 1.0,
                 edge_subst_cost=lambda a, b: 0.0,
@@ -146,7 +216,7 @@ def compute_dag_edit_distance(
             # Fallback to fast DAG edit distance if timed out or failed
             pass
 
-    return _fast_dag_edit_distance(g1, g2)
+    return _fast_dag_edit_distance(g1, g2, include_value_distance=include_value_distance)
 
 
 def compute_tdi(
@@ -154,6 +224,7 @@ def compute_tdi(
     threshold: float = 0.85,
     exact: bool = False,
     timeout_per_pair: Optional[float] = 1.0,
+    include_value_distance: bool = True,
 ) -> TDIResult:
     """Compute the Trajectory Determinism Index (TDI) across K Monte Carlo rollouts.
 
@@ -202,7 +273,11 @@ def compute_tdi(
             raw_dist = 0.0
         else:
             raw_dist = compute_dag_edit_distance(
-                g1, g2, exact=exact, timeout_seconds=timeout_per_pair
+                g1,
+                g2,
+                exact=exact,
+                timeout_seconds=timeout_per_pair,
+                include_value_distance=include_value_distance,
             )
             # Bound normalized distance to [0.0, 1.0]
             norm_dist = min(1.0, raw_dist / max_size)

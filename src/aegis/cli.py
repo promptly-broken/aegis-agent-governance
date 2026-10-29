@@ -32,14 +32,15 @@ def cmd_report(args: argparse.Namespace) -> int:
         from benchmarks.generate_executive_report import generate_report
 
 
-    report_markdown = generate_report()
+    report_format = getattr(args, "format", "markdown") or "markdown"
+    report_content = generate_report(output_format=report_format)
     if args.output:
         out_path = Path(args.output)
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(report_markdown, encoding="utf-8")
-        print(f"Executive governance report written to: {out_path.resolve()}", file=sys.stderr)
+        out_path.write_text(report_content, encoding="utf-8")
+        print(f"Executive governance report ({report_format}) written to: {out_path.resolve()}", file=sys.stderr)
     else:
-        print(report_markdown)
+        print(report_content)
     return 0
 
 
@@ -109,7 +110,7 @@ def cmd_eval(args: argparse.Namespace) -> int:
     tdi_score: Optional[float] = None
     if len(trajectories) >= 2:
         tdi_res = compute_tdi(trajectories, threshold=args.min_tdi)
-        tdi_score = tdi_res.tdi_score
+        tdi_score = tdi_res.tdi
 
     print("\n# Aegis Trajectory Governance Evaluation\n")
     print(f"- **Evaluated Trajectories:** {len(trajectories)}")
@@ -221,8 +222,24 @@ def build_parser() -> argparse.ArgumentParser:
 
     # report
     p_report = subparsers.add_parser("report", help="Generate executive FinOps & governance report")
-    p_report.add_argument("-o", "--output", help="Optional output path for markdown report")
+    p_report.add_argument("-o", "--output", help="Optional output path for report")
+    p_report.add_argument(
+        "--format",
+        choices=["markdown", "html"],
+        default="markdown",
+        help="Report output format: markdown or html (default: markdown)",
+    )
     p_report.set_defaults(func=cmd_report)
+
+    # dashboard
+    p_dash = subparsers.add_parser("dashboard", help="Generate interactive HTML governance & FinOps dashboard")
+    p_dash.add_argument(
+        "-o",
+        "--output",
+        default="aegis_dashboard.html",
+        help="Output path for HTML dashboard (default: aegis_dashboard.html)",
+    )
+    p_dash.set_defaults(func=lambda a: cmd_report(argparse.Namespace(output=a.output, format="html")))
 
     # profile-mcp
     p_mcp = subparsers.add_parser("profile-mcp", help="Audit MCP Token Amplification Factor (TAF)")
