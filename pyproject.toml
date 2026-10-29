@@ -60,6 +60,9 @@ dev = [
     "pytest-cov>=5.0.0",
 ]
 
+[project.scripts]
+aegis = "aegis.cli:main"
+
 [project.entry-points.pytest11]
 aegis = "aegis.pytest_plugin.decorator"
 

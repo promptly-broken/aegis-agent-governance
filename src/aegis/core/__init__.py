@@ -9,6 +9,7 @@ from aegis.core.models import (
     TrajectoryDAG,
 )
 from aegis.core.pricing import ModelPricing, PricingRegistry
+from aegis.core.tracer import AegisTracer, SpanContext
 
 __all__ = [
     "SpanType",
@@ -19,4 +20,6 @@ __all__ = [
     "MCPStateTransition",
     "TrajectoryDAG",
     "PricingRegistry",
+    "AegisTracer",
+    "SpanContext",
 ]

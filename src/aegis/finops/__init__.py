@@ -6,12 +6,17 @@ from aegis.finops.circuit_breaker import (
     CircuitBreakerConfig,
     CircuitBreakerStatus,
     CircuitBreakerTrip,
+    StreamingCircuitBreaker,
+    StreamingStepContext,
 )
 from aegis.finops.ecrt import ECRTResult, compute_ecrt
 from aegis.finops.router import (
+    ExecutionResult,
     HybridComplexityRouter,
     RoutingDecision,
     TaskComplexity,
+    TaskDispatcher,
+    execute_routed_task,
 )
 
 __all__ = [
@@ -22,7 +27,12 @@ __all__ = [
     "CircuitBreakerStatus",
     "BreakerTripReason",
     "CircuitBreakerTrip",
+    "StreamingCircuitBreaker",
+    "StreamingStepContext",
     "HybridComplexityRouter",
     "RoutingDecision",
     "TaskComplexity",
+    "ExecutionResult",
+    "TaskDispatcher",
+    "execute_routed_task",
 ]

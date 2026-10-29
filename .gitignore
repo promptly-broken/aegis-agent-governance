@@ -37,7 +37,8 @@ env/
 htmlcov/
 junit.xml
 
-# IDE
+# IDE & local config
 .vscode/
 .idea/
 .DS_Store
+.github/

@@ -36,3 +36,30 @@ def test_router_explicit_metadata_override():
 
     decision_high = router.route("Ambiguous prompt text", metadata={"task_type": "dispute_resolution"})
     assert decision_high.selected_tier == ModelTier.FRONTIER_CLOUD
+
+
+def test_task_dispatcher_local_fallback():
+    from aegis.finops.router import TaskDispatcher, execute_routed_task
+
+    # When Ollama is offline, dispatcher gracefully returns deterministic fallback
+    dispatcher = TaskDispatcher(ollama_base_url="http://127.0.0.1:59999")
+    res = dispatcher.execute_task("Extract postal code from address string", force_tier=ModelTier.LOCAL_OLLAMA)
+
+    assert res.tier == ModelTier.LOCAL_OLLAMA
+    assert res.is_fallback is True
+    assert res.prompt_tokens > 0
+    assert "processed" in res.content
+    assert res.cost_usd >= 0.0
+
+
+def test_task_dispatcher_cloud_execution():
+    from aegis.finops.router import execute_routed_task
+
+    res = execute_routed_task(
+        "Arbitrate strategic dispute settlement",
+        metadata={"task_type": "dispute_resolution"},
+    )
+    assert res.tier == ModelTier.FRONTIER_CLOUD
+    assert res.is_fallback is False
+    assert res.cost_usd > 0.0
+

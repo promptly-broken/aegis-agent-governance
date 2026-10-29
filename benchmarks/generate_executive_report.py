@@ -70,11 +70,11 @@ def generate_report() -> str:
 |:---|:---|
 | **Hypothesis Null ($H_0$)** | $p_0 = {sprt.p0}$ (Unacceptable Reliability) |
 | **Hypothesis Alt ($H_1$)** | $p_1 = {sprt.p1}$ (Production Target) |
-| **Significance ($ lpha,  eta$)** | $ lpha = {sprt.alpha}$, $ eta = {sprt.beta}$ |
+| **Significance ($\alpha, \beta$)** | $\alpha = {sprt.alpha}$, $\beta = {sprt.beta}$ |
 | **Rollouts Evaluated** | {sprt_res.step} attempts |
 | **Decision Reached** | `{sprt_res.decision.value}` |
 | **Empirical Success Rate** | {sprt_res.empirical_rate * 100:.1f}% |
-| **Compute Cycles Saved** | Early stopped at step 11 vs 100 fixed trials |
+| **Compute Cycles Saved** | Early stopped at step {sprt_res.step} vs 100 fixed trials |
 
 ---
 
@@ -95,8 +95,8 @@ def generate_report() -> str:
 
 | Protocol Mode | Context Tokens Transmitted | Efficiency Gain |
 |:---|:---:|:---:|
-| **Stateless MCP (Full History Re-transmission)** | 2169 tokens | Baseline |
-| **Stateful MCP (Redis Session Pointer)** | 2166 tokens | **0.1% reduction** |
+| **Stateless MCP (Full History Re-transmission)** | {mcp_report.total_stateless_tokens} tokens | Baseline |
+| **Stateful MCP (Redis Session Pointer)** | {mcp_report.total_stateful_tokens} tokens | **{mcp_report.percentage_token_reduction:.1f}% reduction** |
 | **Token Amplification Factor (TAF)** | **{mcp_report.token_amplification_factor:.2f}x** | Context Bloat Quantified |
 """
     return report
