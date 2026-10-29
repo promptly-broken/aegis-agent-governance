@@ -134,3 +134,4 @@ def run_hybrid_pipeline_benchmark() -> Dict[str, Any]:
         "mcp_token_reduction_pct": round(mcp_report.percentage_token_reduction, 1),
         "trajectory": hybrid_dag,
     }
+

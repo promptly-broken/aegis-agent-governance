@@ -212,6 +212,22 @@ def cmd_export(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_benchmark_live(args: argparse.Namespace) -> int:
+    """Execute live Apple Silicon Ollama benchmark suite."""
+    try:
+        from benchmarks.run_live_hardware_benchmark import execute_live_benchmark_suite
+    except ModuleNotFoundError:
+        cwd = Path.cwd()
+        for candidate in [cwd, cwd.parent, Path(__file__).resolve().parent.parent.parent]:
+            if (candidate / "benchmarks").is_dir():
+                sys.path.insert(0, str(candidate.resolve()))
+                break
+        from benchmarks.run_live_hardware_benchmark import execute_live_benchmark_suite
+
+    execute_live_benchmark_suite(num_rollouts=args.rollouts)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     """Construct command-line argument parser."""
     parser = argparse.ArgumentParser(
@@ -280,6 +296,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p_export.add_argument("-o", "--output", help="Output file path")
     p_export.set_defaults(func=cmd_export)
+
+    # benchmark-live
+    p_live = subparsers.add_parser(
+        "benchmark-live",
+        help="Run live empirical Apple Silicon Ollama hardware benchmarks",
+    )
+    p_live.add_argument(
+        "-k", "--rollouts", type=int, default=5, help="Number of Monte Carlo rollouts per cohort"
+    )
+    p_live.set_defaults(func=cmd_benchmark_live)
 
     return parser
 

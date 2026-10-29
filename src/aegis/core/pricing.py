@@ -167,6 +167,42 @@ class PricingRegistry:
                 kwh_cost_usd=0.15,
                 amortized_hardware_cost_per_second=0.0000317,
             ),
+            ModelPricing(
+                model_name="qwen2.5-coder:7b-instruct",
+                tier=ModelTier.LOCAL_OLLAMA,
+                input_cost_per_million=0.0,
+                output_cost_per_million=0.0,
+                device_power_watts=28.0,
+                kwh_cost_usd=0.15,
+                amortized_hardware_cost_per_second=0.0000317,  # Apple M5 Pro 48GB ($3000 / 3 yrs)
+            ),
+            ModelPricing(
+                model_name="deepseek-coder:6.7b",
+                tier=ModelTier.LOCAL_OLLAMA,
+                input_cost_per_million=0.0,
+                output_cost_per_million=0.0,
+                device_power_watts=26.0,
+                kwh_cost_usd=0.15,
+                amortized_hardware_cost_per_second=0.0000317,
+            ),
+            ModelPricing(
+                model_name="phi3:mini",
+                tier=ModelTier.LOCAL_OLLAMA,
+                input_cost_per_million=0.0,
+                output_cost_per_million=0.0,
+                device_power_watts=20.0,
+                kwh_cost_usd=0.15,
+                amortized_hardware_cost_per_second=0.0000317,
+            ),
+            ModelPricing(
+                model_name="gemma3:270m",
+                tier=ModelTier.LOCAL_OLLAMA,
+                input_cost_per_million=0.0,
+                output_cost_per_million=0.0,
+                device_power_watts=12.0,
+                kwh_cost_usd=0.15,
+                amortized_hardware_cost_per_second=0.0000317,
+            ),
         ]
         for p in defaults:
             self.register(p)

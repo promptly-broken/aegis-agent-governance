@@ -1,0 +1,2596 @@
+{
+  "resourceSpans": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "service.name",
+            "value": {
+              "stringValue": "aegis-live-m5-pro-benchmark"
+            }
+          },
+          {
+            "key": "service.version",
+            "value": {
+              "stringValue": "0.1.0"
+            }
+          },
+          {
+            "key": "aegis.governance.tdi",
+            "value": {
+              "doubleValue": 1.0
+            }
+          },
+          {
+            "key": "aegis.governance.is_deterministic",
+            "value": {
+              "boolValue": true
+            }
+          },
+          {
+            "key": "aegis.finops.ecrt_usd",
+            "value": {
+              "doubleValue": 8.7e-05
+            }
+          },
+          {
+            "key": "aegis.finops.resolution_rate",
+            "value": {
+              "doubleValue": 1.0
+            }
+          }
+        ]
+      },
+      "scopeSpans": [
+        {
+          "scope": {
+            "name": "aegis.telemetry.tracer",
+            "version": "0.1.0"
+          },
+          "spans": [
+            {
+              "traceId": "ee94b8cd3c7ceed4b1fa7b2cdddc2180",
+              "spanId": "a8aedc999afdf950",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t0_deterministic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259234451758080",
+              "endTimeUnixNano": "1793259237226008064",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic_1"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 9.118e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ee94b8cd3c7ceed4b1fa7b2cdddc2180",
+              "spanId": "4e01180f42df44d6",
+              "parentSpanId": "a8aedc999afdf950",
+              "name": "ollama_planner_rollout_1",
+              "kind": 3,
+              "startTimeUnixNano": "1793259234451758080",
+              "endTimeUnixNano": "1793259237226008064",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 9.118e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "241"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "150"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 170.05
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.0
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 57.71
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ee94b8cd3c7ceed4b1fa7b2cdddc2180",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "a8aedc999afdf950",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259234451758080",
+              "endTimeUnixNano": "1793259234463758080",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ee94b8cd3c7ceed4b1fa7b2cdddc2180",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "a8aedc999afdf950",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259234451758080",
+              "endTimeUnixNano": "1793259234463758080",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ee94b8cd3c7ceed4b1fa7b2cdddc2180",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "a8aedc999afdf950",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1793259234451758080",
+              "endTimeUnixNano": "1793259234463758080",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "5c241a9a459961700674b4f744a4a07a",
+              "spanId": "0d9e8fcaa67feb49",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t0_deterministic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259237227006208",
+              "endTimeUnixNano": "1793259239825036032",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic_2"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 8.539e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "5c241a9a459961700674b4f744a4a07a",
+              "spanId": "0443adfe95774b7c",
+              "parentSpanId": "0d9e8fcaa67feb49",
+              "name": "ollama_planner_rollout_2",
+              "kind": 3,
+              "startTimeUnixNano": "1793259237227006208",
+              "endTimeUnixNano": "1793259239825036032",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 8.539e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "241"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "150"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 22.4
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.0
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.33
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "5c241a9a459961700674b4f744a4a07a",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "0d9e8fcaa67feb49",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259237227006208",
+              "endTimeUnixNano": "1793259237239006208",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "5c241a9a459961700674b4f744a4a07a",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "0d9e8fcaa67feb49",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259237227006208",
+              "endTimeUnixNano": "1793259237239006208",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "5c241a9a459961700674b4f744a4a07a",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "0d9e8fcaa67feb49",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1793259237227006208",
+              "endTimeUnixNano": "1793259237239006208",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05ae360c48d3f6400b69b37dc590a5bc",
+              "spanId": "a481402cc38a615f",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t0_deterministic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259239825248000",
+              "endTimeUnixNano": "1793259242433427968",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic_3"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 8.572e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05ae360c48d3f6400b69b37dc590a5bc",
+              "spanId": "1f18e361424b453c",
+              "parentSpanId": "a481402cc38a615f",
+              "name": "ollama_planner_rollout_3",
+              "kind": 3,
+              "startTimeUnixNano": "1793259239825248000",
+              "endTimeUnixNano": "1793259242433427968",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 8.572e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "241"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "150"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 22.91
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.0
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.12
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05ae360c48d3f6400b69b37dc590a5bc",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "a481402cc38a615f",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259239825248000",
+              "endTimeUnixNano": "1793259239837248000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05ae360c48d3f6400b69b37dc590a5bc",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "a481402cc38a615f",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259239825248000",
+              "endTimeUnixNano": "1793259239837248000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05ae360c48d3f6400b69b37dc590a5bc",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "a481402cc38a615f",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1793259239825248000",
+              "endTimeUnixNano": "1793259239837248000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "08b9227b7ccc1b6fbfe9619c6259062b",
+              "spanId": "ecef84f85c8a7b2d",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t0_deterministic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259242433651200",
+              "endTimeUnixNano": "1793259245060921088",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic_4"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 8.635e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "08b9227b7ccc1b6fbfe9619c6259062b",
+              "spanId": "ce2dc4b65b704677",
+              "parentSpanId": "ecef84f85c8a7b2d",
+              "name": "ollama_planner_rollout_4",
+              "kind": 3,
+              "startTimeUnixNano": "1793259242433651200",
+              "endTimeUnixNano": "1793259245060921088",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 8.635e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "241"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "150"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 22.97
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.0
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 57.69
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "08b9227b7ccc1b6fbfe9619c6259062b",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "ecef84f85c8a7b2d",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259242433651200",
+              "endTimeUnixNano": "1793259242445651200",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "08b9227b7ccc1b6fbfe9619c6259062b",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "ecef84f85c8a7b2d",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259242433651200",
+              "endTimeUnixNano": "1793259242445651200",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "08b9227b7ccc1b6fbfe9619c6259062b",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "ecef84f85c8a7b2d",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1793259242433651200",
+              "endTimeUnixNano": "1793259242445651200",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2952ab711c24680fe7b9e4968d3dc512",
+              "spanId": "9f435913b178d37f",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t0_deterministic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259245061139712",
+              "endTimeUnixNano": "1793259247662949632",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic_5"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 8.551e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2952ab711c24680fe7b9e4968d3dc512",
+              "spanId": "be5f09e7f2e544bf",
+              "parentSpanId": "9f435913b178d37f",
+              "name": "ollama_planner_rollout_5",
+              "kind": 3,
+              "startTimeUnixNano": "1793259245061139712",
+              "endTimeUnixNano": "1793259247662949632",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t0_deterministic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 8.551e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "241"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "150"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "391"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 22.38
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.0
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.25
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2952ab711c24680fe7b9e4968d3dc512",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "9f435913b178d37f",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259245061139712",
+              "endTimeUnixNano": "1793259245073139712",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2952ab711c24680fe7b9e4968d3dc512",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "9f435913b178d37f",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259245061139712",
+              "endTimeUnixNano": "1793259245073139712",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2952ab711c24680fe7b9e4968d3dc512",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "9f435913b178d37f",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1793259245061139712",
+              "endTimeUnixNano": "1793259245073139712",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "e1d4dc0c1c0479d809a73d9226aa15ea",
+              "spanId": "1dd09a57b81af805",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t08_stochastic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259247666937088",
+              "endTimeUnixNano": "1793259249201217024",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic_1"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "246"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 5.043e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "e1d4dc0c1c0479d809a73d9226aa15ea",
+              "spanId": "3aa42044d64d456f",
+              "parentSpanId": "1dd09a57b81af805",
+              "name": "ollama_planner_rollout_1",
+              "kind": 3,
+              "startTimeUnixNano": "1793259247666937088",
+              "endTimeUnixNano": "1793259249201217024",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 5.043e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "166"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "80"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "246"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 160.96
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.8
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.49
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "e1d4dc0c1c0479d809a73d9226aa15ea",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "1dd09a57b81af805",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259247666937088",
+              "endTimeUnixNano": "1793259247678937088",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "e1d4dc0c1c0479d809a73d9226aa15ea",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "1dd09a57b81af805",
+              "name": "tool:warehouse_inventory_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259247666937088",
+              "endTimeUnixNano": "1793259247678937088",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "warehouse_inventory_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "6e02b7a12970452313861fc44c26c021",
+              "spanId": "4136ab2d59760498",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t08_stochastic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259249201448192",
+              "endTimeUnixNano": "1793259250618778368",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic_2"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "247"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 4.658e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "6e02b7a12970452313861fc44c26c021",
+              "spanId": "1cc3d8eb39274901",
+              "parentSpanId": "4136ab2d59760498",
+              "name": "ollama_planner_rollout_2",
+              "kind": 3,
+              "startTimeUnixNano": "1793259249201448192",
+              "endTimeUnixNano": "1793259250618778368",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 4.658e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "166"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "81"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "247"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 22.04
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.8
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.32
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "6e02b7a12970452313861fc44c26c021",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "4136ab2d59760498",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259249201448192",
+              "endTimeUnixNano": "1793259249213448192",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "6e02b7a12970452313861fc44c26c021",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "4136ab2d59760498",
+              "name": "tool:merchant_escalation",
+              "kind": 1,
+              "startTimeUnixNano": "1793259249201448192",
+              "endTimeUnixNano": "1793259249213448192",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "merchant_escalation"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "3a09ead88188626c40e6f5970569a4a7",
+              "spanId": "11f15e8998e4abae",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t08_stochastic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259250618955008",
+              "endTimeUnixNano": "1793259252018565120",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic_3"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "246"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 4.6e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "3a09ead88188626c40e6f5970569a4a7",
+              "spanId": "6517050b5e6f4042",
+              "parentSpanId": "11f15e8998e4abae",
+              "name": "ollama_planner_rollout_3",
+              "kind": 3,
+              "startTimeUnixNano": "1793259250618955008",
+              "endTimeUnixNano": "1793259252018565120",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 4.6e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "166"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "80"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "246"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 21.87
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.8
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.24
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "3a09ead88188626c40e6f5970569a4a7",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "11f15e8998e4abae",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259250618955008",
+              "endTimeUnixNano": "1793259250630955008",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "3a09ead88188626c40e6f5970569a4a7",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "11f15e8998e4abae",
+              "name": "tool:warehouse_inventory_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259250618955008",
+              "endTimeUnixNano": "1793259250630955008",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "warehouse_inventory_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c7a0ef19392a858a2c409c30753a605a",
+              "spanId": "58cbc3d122b13801",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t08_stochastic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259252018744832",
+              "endTimeUnixNano": "1793259254163664896",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic_4"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "289"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 7.05e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c7a0ef19392a858a2c409c30753a605a",
+              "spanId": "9c50ae6d9afd48bd",
+              "parentSpanId": "58cbc3d122b13801",
+              "name": "ollama_planner_rollout_4",
+              "kind": 3,
+              "startTimeUnixNano": "1793259252018744832",
+              "endTimeUnixNano": "1793259254163664896",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 7.05e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "166"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "123"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "289"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 22.17
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.8
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.07
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c7a0ef19392a858a2c409c30753a605a",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "58cbc3d122b13801",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259252018744832",
+              "endTimeUnixNano": "1793259252030744832",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c7a0ef19392a858a2c409c30753a605a",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "58cbc3d122b13801",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1793259252018744832",
+              "endTimeUnixNano": "1793259252030744832",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c7a0ef19392a858a2c409c30753a605a",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "58cbc3d122b13801",
+              "name": "tool:send_apology_coupon",
+              "kind": 1,
+              "startTimeUnixNano": "1793259252018744832",
+              "endTimeUnixNano": "1793259252030744832",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "send_apology_coupon"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"reason\": \"Package not received\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,reason"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "394563e06363c7717782de952b3c76d6",
+              "spanId": "f07fbecda9931a55",
+              "parentSpanId": "",
+              "name": "trajectory:live_apple_silicon_t08_stochastic",
+              "kind": 1,
+              "startTimeUnixNano": "1793259254163879168",
+              "endTimeUnixNano": "1793259256116289024",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic_5"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "278"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 6.417e-05
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "394563e06363c7717782de952b3c76d6",
+              "spanId": "d07eafa6a6364ebd",
+              "parentSpanId": "f07fbecda9931a55",
+              "name": "ollama_planner_rollout_5",
+              "kind": 3,
+              "startTimeUnixNano": "1793259254163879168",
+              "endTimeUnixNano": "1793259256116289024",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_apple_silicon_t08_stochastic"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 6.417e-05
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "166"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "112"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "278"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "qwen2.5-coder:7b-instruct"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "local_ollama"
+                  }
+                },
+                {
+                  "key": "gen_ai.latency.ttft_ms",
+                  "value": {
+                    "doubleValue": 22.5
+                  }
+                },
+                {
+                  "key": "aegis.attr.temperature",
+                  "value": {
+                    "doubleValue": 0.8
+                  }
+                },
+                {
+                  "key": "aegis.attr.tokens_per_sec",
+                  "value": {
+                    "doubleValue": 58.16
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "394563e06363c7717782de952b3c76d6",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "f07fbecda9931a55",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1793259254163879168",
+              "endTimeUnixNano": "1793259254175879168",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "394563e06363c7717782de952b3c76d6",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "f07fbecda9931a55",
+              "name": "tool:merchant_escalation",
+              "kind": 1,
+              "startTimeUnixNano": "1793259254163879168",
+              "endTimeUnixNano": "1793259254175879168",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "merchant_escalation"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"issue_description\": \"Package has not arrived despite multiple attempts to contact the carrier.\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,issue_description,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
