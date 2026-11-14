@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aegis Agent Governance — System Architecture Diagram</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1650px;
+    height: 940px;
+    background: #FFFFFF;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #0F172A;
+    padding: 26px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* Academic Header */
+  .header {
+    border-bottom: 2px solid #E2E8F0;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .header-left h1 {
+    font-size: 21px;
+    font-weight: 800;
+    color: #0F172A;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+  .header-left p {
+    font-size: 13px;
+    color: #64748B;
+    font-weight: 500;
+  }
+  .header-badge {
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-weight: 600;
+    color: #334155;
+  }
+
+  /* Main Grid with Dedicated Connector Columns */
+  .grid-container {
+    display: grid;
+    grid-template-columns: 295px 36px 435px 36px 365px 36px 375px;
+    align-items: center;
+    height: 745px;
+  }
+
+  /* Flow Connector Columns */
+  .flow-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .flow-badge {
+    background: #F8FAFC;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 20px;
+    padding: 8px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  }
+  .flow-badge .arrow-icon {
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 900;
+  }
+  .flow-badge .flow-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 8.5px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .flow-1 .flow-badge { border-color: #FCD34D; background: #FFFBEB; }
+  .flow-1 .arrow-icon { color: #D97706; }
+  .flow-1 .flow-label { color: #B45309; }
+
+  .flow-2 .flow-badge { border-color: #A7F3D0; background: #ECFDF5; }
+  .flow-2 .arrow-icon { color: #059669; }
+  .flow-2 .flow-label { color: #047857; }
+
+  .flow-3 .flow-badge { border-color: #93C5FD; background: #EFF6FF; }
+  .flow-3 .arrow-icon { color: #2563EB; }
+  .flow-3 .flow-label { color: #1D4ED8; }
+
+  /* Column Card Base */
+  .col-card {
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 12px;
+    border: 1.5px solid #CBD5E1;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid;
+  }
+  .card-body {
+    padding: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    flex: 1;
+    background: #FAFAFA;
+  }
+
+  /* Specific Column Styling */
+  .col-1 { border-color: #F59E0B; border-width: 2px; }
+  .col-1 .card-header { background: #FEF3C7; border-color: #FDE68A; color: #92400E; }
+
+  .col-2 { border-color: #10B981; border-width: 2px; }
+  .col-2 .card-header { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+
+  .col-3 { border-color: #3B82F6; border-width: 2px; }
+  .col-3 .card-header { background: #EFF6FF; border-color: #BFDBFE; color: #1E40AF; }
+
+  .col-4 { border-color: #4C1D95; border-width: 2px; }
+  .col-4 .card-header { background: #4C1D95; border-color: #4C1D95; color: #FFFFFF; }
+
+  /* Inner Sub-cards */
+  .sub-box {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  }
+  .sub-title {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #1E293B;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sub-desc {
+    font-size: 9.5px;
+    color: #64748B;
+    line-height: 1.35;
+  }
+
+  /* Formula block */
+  .formula-box {
+    background: #F8FAFC;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-family: Georgia, serif;
+    font-size: 10.5px;
+    color: #1E293B;
+    text-align: center;
+  }
+
+  /* Code Blocks */
+  .code-block {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-left: 3px solid #3B82F6;
+    border-radius: 4px;
+    padding: 6px 9px;
+    font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 8.8px;
+    line-height: 1.45;
+    color: #1E293B;
+  }
+  .code-block .sec-head {
+    color: #1D4ED8;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  /* Hardware Stats Grid */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .stat-card {
+    background: #FFFFFF;
+    border: 1px solid #BBF7D0;
+    border-radius: 6px;
+    padding: 7px 9px;
+  }
+  .stat-card .lbl {
+    font-size: 9px;
+    font-family: "SF Mono", Consolas, monospace;
+    color: #0F172A;
+    font-weight: 700;
+  }
+  .stat-card .val {
+    font-size: 13px;
+    font-weight: 800;
+    color: #059669;
+    margin-top: 2px;
+  }
+  .stat-card .sub {
+    font-size: 8px;
+    font-family: "SF Mono", Consolas, monospace;
+    color: #64748B;
+    margin-top: 1px;
+  }
+
+  /* Footer Legend */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #E2E8F0;
+    padding-top: 10px;
+    font-size: 11px;
+    color: #64748B;
+  }
+  .legend {
+    display: flex;
+    gap: 20px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Academic Header -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Figure 1: Aegis Agent Governance &mdash; Statistical Evaluation, FinOps Arbitrage &amp; Runtime Control Plane</h1>
+      <p>Decoupled Control Architecture: Non-Invasive Middleware &rarr; Entropy-Gated Edge/Cloud Router &rarr; Streaming Circuit Breaker &amp; Stateful MCP &rarr; Statistical CI/CD Gate (TDI, SPRT, ECRT)</p>
+    </div>
+    <div class="header-badge">
+      Apple M5 Pro (48 GB) &bull; 95.9% ECRT Reduction &bull; v0.1.0
+    </div>
+  </div>
+
+  <!-- Main Grid with Explicit Flow Connectors -->
+  <div class="grid-container">
+
+    <!-- ================= COLUMN 1 ================= -->
+    <div class="col-card col-1">
+      <div class="card-header">
+        <span>1. Agent Ingress</span>
+        <span style="font-size:9.5px; font-weight:700; color:#B45309;">aegis.integrations</span>
+      </div>
+      <div class="card-body">
+        
+        <!-- Middleware Adapters -->
+        <div class="sub-box" style="background:#FFFBEB; border-color:#FDE68A;">
+          <div class="sub-title" style="color:#78350F;">Drop-In Middleware Adapters</div>
+          <div class="sub-desc" style="font-family:'SF Mono', monospace; color:#B45309;">Zero-rewrite interception hooks:</div>
+          <div style="display:flex; flex-direction:column; gap:5px; margin-top:3px;">
+            <div style="background:#FFFFFF; border:1px solid #FCD34D; border-radius:4px; padding:5px 8px; font-family:'SF Mono', monospace; font-size:9px; font-weight:700; color:#92400E;">
+              @governed_tool(tracer, cb)
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:4px; padding:5px 8px; font-family:'SF Mono', monospace; font-size:8.8px; font-weight:600; color:#334155;">
+              LangGraphGovernanceCallback
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:4px; padding:5px 8px; font-family:'SF Mono', monospace; font-size:8.8px; font-weight:600; color:#334155;">
+              OpenAIAgentsGovernanceHooks
+            </div>
+          </div>
+          <div style="font-size:9px; color:#B45309; font-weight:600; margin-top:2px;">
+            &#x2714; Native Sync &amp; Async Function Support
+          </div>
+        </div>
+
+        <!-- Production Workloads -->
+        <div class="sub-box">
+          <div class="sub-title">Governed Production Workloads</div>
+          <div class="sub-desc">Intercepted prior to tool or model execution:</div>
+          
+          <div style="display:flex; flex-direction:column; gap:6px; margin-top:3px;">
+            <div style="background:#F1F5F9; border:1px solid #CBD5E1; border-radius:5px; padding:5px 8px; display:flex; align-items:center; justify-content:space-between;">
+              <span style="background:#DBEAFE; color:#1E40AF; padding:2px 6px; border-radius:3px; font-size:8px; font-family:'SF Mono', monospace; font-weight:700;">DISPUTES</span>
+              <span style="font-size:9px; color:#334155; font-weight:600;">4-Step Order Refund DAG</span>
+            </div>
+            <div style="background:#F1F5F9; border:1px solid #CBD5E1; border-radius:5px; padding:5px 8px; display:flex; align-items:center; justify-content:space-between;">
+              <span style="background:#FEE2E2; color:#991B1B; padding:2px 6px; border-radius:3px; font-size:8px; font-family:'SF Mono', monospace; font-weight:700;">NEGOTIATE</span>
+              <span style="font-size:9px; color:#334155; font-weight:600;">Buyer &harr; Vendor B2B Loop</span>
+            </div>
+            <div style="background:#F1F5F9; border:1px solid #CBD5E1; border-radius:5px; padding:5px 8px; display:flex; align-items:center; justify-content:space-between;">
+              <span style="background:#DCFCE7; color:#166534; padding:2px 6px; border-radius:3px; font-size:8px; font-family:'SF Mono', monospace; font-weight:700;">TEXT2SQL</span>
+              <span style="font-size:9px; color:#334155; font-weight:600;">Hybrid SQL Extraction</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MCP Proxy -->
+        <div class="sub-box" style="flex:1;">
+          <div class="sub-title">GovernedMCPSessionProxy</div>
+          <div class="sub-desc">Wraps Model Context Protocol JSON-RPC transport:</div>
+          <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:6px; padding:7px 9px; font-family:'SF Mono', monospace; font-size:8.6px; color:#475569; display:flex; flex-direction:column; gap:4px; flex:1;">
+            <div>&bull; Intercepts <b>call_tool(name, args)</b></div>
+            <div>&bull; Compresses state payloads &gt; 512 B</div>
+            <div style="color:#2563EB; font-weight:700;">&bull; Emits urn:mcp:state:{id}#v{n}</div>
+            <div style="color:#059669; font-weight:600;">&bull; Prevents O(T&sup2;) context bloat</div>
+          </div>
+          <div style="font-size:9px; color:#D97706; font-weight:600;">
+            &#x25CF; Sub-Millisecond Async Interception
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONNECTOR 1 -> 2 -->
+    <div class="flow-connector flow-1">
+      <div class="flow-badge">
+        <span class="arrow-icon">&rarr;</span>
+        <span class="flow-label">Prompt &amp; Schema</span>
+      </div>
+    </div>
+
+    <!-- ================= COLUMN 2 ================= -->
+    <div class="col-card col-2">
+      <div class="card-header">
+        <span>2. Hybrid FinOps Router</span>
+        <span style="font-size:9.5px; font-weight:700; color:#047857;">aegis.finops</span>
+      </div>
+      <div class="card-body">
+        
+        <!-- Entropy Scorer -->
+        <div class="sub-box" style="background:#F0FDF4; border-color:#BBF7D0;">
+          <div class="sub-title" style="color:#166534;">A. Structural &amp; Logprob Entropy Scorer</div>
+          <div class="formula-box" style="border-color:#86EFAC; background:#FFFFFF;">
+            H(x) = w<sub>s</sub>&middot;S<sub>struct</sub>(x) + w<sub>d</sub>&middot;D<sub>schema</sub>(x) + w<sub>p</sub>&middot;H<sub>logprob</sub>(x) &isin; [0, 1]
+          </div>
+          
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:2px;">
+            <div style="background:#DCFCE7; border:1px solid #86EFAC; border-radius:5px; padding:5px 7px;">
+              <div style="font-family:'SF Mono', monospace; font-size:8.5px; font-weight:700; color:#166534;">H(x) &lt; 0.65 &rarr; LOCAL EDGE</div>
+              <div style="font-size:8.5px; color:#15803D; margin-top:1px;">Deterministic JSON / SQL / Tools</div>
+            </div>
+            <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:5px; padding:5px 7px;">
+              <div style="font-family:'SF Mono', monospace; font-size:8.5px; font-weight:700; color:#92400E;">H(x) &ge; 0.65 &rarr; CLOUD API</div>
+              <div style="font-size:8.5px; color:#B45309; margin-top:1px;">Ambiguous Policy Arbitration</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Local Apple Silicon Tier -->
+        <div class="sub-box" style="background:#F0FDF4; border-color:#BBF7D0;">
+          <div class="sub-title" style="color:#166534;">
+            <span>B. Local Edge Tier: Apple M5 Pro (48 GB)</span>
+            <span style="font-size:9px; color:#047857; font-family:'SF Mono', monospace;">Ollama / MLX</span>
+          </div>
+          <div class="sub-desc">Live hardware benchmarks (CapEx amortization + 42W wall-plug OpEx):</div>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <div class="lbl">gemma3:270m</div>
+              <div class="val">377.1 tok/s <span style="font-size:9px; color:#15803D; font-weight:600;">(96.8% saved)</span></div>
+              <div class="sub">TTFT: 22.3 ms &bull; $0.000023 TCO</div>
+            </div>
+            <div class="stat-card">
+              <div class="lbl">phi3:mini (3.8B)</div>
+              <div class="val">104.7 tok/s <span style="font-size:9px; color:#15803D; font-weight:600;">(89.6% saved)</span></div>
+              <div class="sub">TTFT: 60.2 ms &bull; $0.000089 TCO</div>
+            </div>
+            <div class="stat-card">
+              <div class="lbl">deepseek-coder:6.7b</div>
+              <div class="val" style="color:#2563EB;">64.1 tok/s <span style="font-size:9px; color:#1D4ED8; font-weight:600;">(91.6% saved)</span></div>
+              <div class="sub">TTFT: 188.6 ms &bull; $0.000083 TCO</div>
+            </div>
+            <div class="stat-card" style="border-color:#10B981; border-width:1.5px;">
+              <div class="lbl" style="color:#065F46;">qwen2.5-coder:7b</div>
+              <div class="val">58.7 tok/s <span style="font-size:9px; color:#047857; font-weight:700;">(95.9% ECRT)</span></div>
+              <div class="sub">TTFT: 149.1 ms &bull; $0.000087 ECRT</div>
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF; border:1px solid #CBD5E1; border-radius:4px; padding:4px 8px; font-size:9px; font-weight:700; color:#0F172A;">
+            Local TCO: <span style="font-family:'SF Mono', monospace; color:#059669;">C_local = (CapEx / T_amort + P_kW &middot; r_kWh) &times; &Delta;t_sec</span>
+          </div>
+        </div>
+
+        <!-- Cloud Escalation Tier -->
+        <div class="sub-box" style="flex:1;">
+          <div class="sub-title">C. Frontier Cloud Escalation Tier</div>
+          <div class="sub-desc">Invoked strictly when H(x) &ge; 0.65 or local JSON schema fails:</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:2px;">
+            <div style="border:1px solid #CBD5E1; border-radius:5px; padding:5px; background:#F8FAFC;">
+              <div style="font-size:8.5px; font-weight:700; font-family:'SF Mono', monospace;">OpenAI</div>
+              <div style="font-size:9px; font-weight:700; color:#2563EB;">gpt-4o / o3</div>
+              <div style="font-size:7.8px; color:#64748B;">$2.50 / $10.00 1M</div>
+            </div>
+            <div style="border:1px solid #CBD5E1; border-radius:5px; padding:5px; background:#F8FAFC;">
+              <div style="font-size:8.5px; font-weight:700; font-family:'SF Mono', monospace;">Anthropic</div>
+              <div style="font-size:9px; font-weight:700; color:#D97706;">claude-3.5</div>
+              <div style="font-size:7.8px; color:#64748B;">$3.00 / $15.00 1M</div>
+            </div>
+            <div style="border:1px solid #CBD5E1; border-radius:5px; padding:5px; background:#F8FAFC;">
+              <div style="font-size:8.5px; font-weight:700; font-family:'SF Mono', monospace;">Google</div>
+              <div style="font-size:9px; font-weight:700; color:#059669;">gemini-2.5</div>
+              <div style="font-size:7.8px; color:#64748B;">$1.25 / $5.00 1M</div>
+            </div>
+          </div>
+          <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:4px; padding:5px 8px; font-size:9px; font-weight:700; color:#1E40AF; margin-top:auto;">
+            &#x26A1; Hybrid SQL Pipeline Benchmark: 68.5% Net Cloud Spend Saved
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONNECTOR 2 -> 3 -->
+    <div class="flow-connector flow-2">
+      <div class="flow-badge">
+        <span class="arrow-icon">&rarr;</span>
+        <span class="flow-label">Execution Spans</span>
+      </div>
+    </div>
+
+    <!-- ================= COLUMN 3 ================= -->
+    <div class="col-card col-3">
+      <div class="card-header">
+        <span>3. Live Control Plane</span>
+        <span style="font-size:9.5px; font-weight:700; color:#1D4ED8;">aegis.core</span>
+      </div>
+      <div class="card-body">
+        
+        <!-- Circuit Breaker -->
+        <div class="sub-box" style="background:#FEF2F2; border-color:#FECACA;">
+          <div class="sub-title" style="color:#991B1B;">A. StreamingCircuitBreaker</div>
+          <div class="sub-desc" style="color:#B91C1C; font-family:'SF Mono', monospace;">Real-time loop &amp; budget enforcement:</div>
+          <div class="code-block" style="border-left-color:#EF4444;">
+            <div class="sec-head" style="color:#991B1B;">[1. CYCLIC TOOL LOOKAHEAD (W=6, r_max=3)]</div>
+            <div>&bull; Hashes (tool_name, canonical_args) per step</div>
+            <div class="sec-head" style="color:#991B1B; margin-top:3px;">[2. HARD TOKEN &amp; USD SPEND CEILINGS]</div>
+            <div>&bull; Trips before runaway API billing spikes</div>
+            <div style="color:#DC2626; font-weight:700;">&rarr; Raises CircuitBreakerTrippedError</div>
+          </div>
+          <div style="background:#FEE2E2; border:1px solid #F87171; border-radius:4px; padding:5px 8px; font-size:9px; font-weight:700; color:#991B1B;">
+            &#x1F6D1; Buyer&harr;Vendor Loop: 90.6% Cost Saved (58,890 tokens)
+          </div>
+        </div>
+
+        <!-- Tracer & Trajectory DAG -->
+        <div class="sub-box">
+          <div class="sub-title" style="color:#1E40AF;">B. AegisTracer &amp; TrajectoryDAG</div>
+          <div class="sub-desc" style="font-family:'SF Mono', monospace; color:#2563EB;">contextvars.ContextVar + NetworkX DiGraph</div>
+          <div class="code-block">
+            <div>Span[0] ROUTER_DECISION (H=0.31 &rarr; local)</div>
+            <div style="color:#2563EB;"> &lfloor; Span[1] TOOL: lookup_order(ORD-991)</div>
+            <div style="color:#2563EB;"> &lfloor; Span[2] TOOL: verify_warranty()</div>
+            <div style="color:#059669; font-weight:700;">   &lfloor; Span[3] TOOL: issue_refund($149)</div>
+          </div>
+          <div style="font-size:8.8px; color:#475569;">
+            &bull; Canonicalizes nested JSON arguments for graph hashing<br>
+            &bull; Isolated async span stacks across <code>asyncio.gather()</code>
+          </div>
+        </div>
+
+        <!-- Stateful MCP Pointer Store -->
+        <div class="sub-box" style="flex:1; background:#EFF6FF; border-color:#BFDBFE;">
+          <div class="sub-title" style="color:#1E3A8A;">C. RedisMCPStateStore &amp; TAF Profiler</div>
+          <div class="formula-box" style="border-color:#93C5FD; background:#FFFFFF;">
+            TAF = (&Sigma; Tokens<sub>stateless_replay</sub>) / (&Sigma; Tokens<sub>pointer_delta</sub>)
+          </div>
+          <div style="font-size:8.8px; color:#334155; line-height:1.4;">
+            <div>&bull; <b>Stateless MCP:</b> Re-transmits full 15KB state/turn</div>
+            <div style="color:#047857; font-weight:700;">&bull; <b>Aegis Pointer:</b> 42-byte URI + JSON delta diff</div>
+          </div>
+          <div style="font-size:9px; color:#1E40AF; font-weight:700; margin-top:auto;">
+            &#x2714; Eliminates Quadratic Context Window Amplification
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONNECTOR 3 -> 4 -->
+    <div class="flow-connector flow-3">
+      <div class="flow-badge">
+        <span class="arrow-icon">&rarr;</span>
+        <span class="flow-label">Trajectory DAGs</span>
+      </div>
+    </div>
+
+    <!-- ================= COLUMN 4 ================= -->
+    <div class="col-card col-4">
+      <div class="card-header">
+        <span>4. Statistical CI/CD Gate</span>
+        <span style="font-size:9.5px; font-weight:700; color:#C4B5FD;">aegis.eval_engine</span>
+      </div>
+      <div class="card-body">
+        
+        <!-- TDI -->
+        <div class="sub-box" style="background:#F5F3FF; border-color:#DDD6FE;">
+          <div class="sub-title" style="color:#4C1D95;">A. Trajectory Determinism Index (TDI)</div>
+          <div class="formula-box" style="border-color:#C4B5FD; background:#FFFFFF;">
+            TDI = 1 &minus; [2 / K(K&minus;1)] &Sigma; GED<sub>norm</sub>(G<sub>i</sub>, G<sub>j</sub>)
+          </div>
+          <div style="background:#FFFFFF; border:1px solid #C4B5FD; border-radius:5px; padding:6px 8px; display:flex; flex-direction:column; gap:4px;">
+            <div style="font-size:8.8px; font-weight:700; color:#0F172A;">Live M5 Pro (qwen2.5-coder:7b, K=5 rollouts):</div>
+            <div style="background:#DCFCE7; padding:4px 6px; border-radius:3px; font-family:'SF Mono', monospace; font-size:8.8px; font-weight:700; color:#166534;">
+              T=0.0 Governed:   TDI = 1.0000 [PASSED]
+            </div>
+            <div style="background:#FEE2E2; padding:4px 6px; border-radius:3px; font-family:'SF Mono', monospace; font-size:8.8px; font-weight:700; color:#991B1B;">
+              T=0.8 Stochastic: TDI = 0.6189 [FAILED]
+            </div>
+          </div>
+          <div style="font-size:8.5px; color:#5B21B6; font-weight:600;">
+            &bull; Combines Schema-Key Jaccard + Recursive Value Distance
+          </div>
+        </div>
+
+        <!-- SPRT & ECRT -->
+        <div class="sub-box">
+          <div class="sub-title">B. Wald's SPRT &amp; ECRT Unit Economics</div>
+          <div class="formula-box">
+            ECRT = (&Sigma; C<sub>local,i</sub> + &Sigma; C<sub>cloud,i</sub>) / &Sigma; &mathbb{I}(Resolved<sub>i</sub>)
+          </div>
+          <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:5px; padding:6px 8px; font-size:8.8px; line-height:1.45;">
+            <div>&bull; <b>M5 Pro ECRT:</b> <span style="color:#059669; font-weight:700;">$0.000087</span> vs <b>GPT-4o:</b> <span style="color:#DC2626; font-weight:700;">$0.002103</span></div>
+            <div style="color:#166534; font-weight:700;">&bull; <b>Net FinOps Savings:</b> 95.9% TCO Reduction</div>
+            <div style="margin-top:3px; color:#4C1D95; font-weight:700;">&bull; <b>Wald's SPRT (&alpha;=0.05, &beta;=0.10):</b></div>
+            <div style="color:#475569;">Early-stops CI rollouts when log-likelihood crosses bounds</div>
+          </div>
+        </div>
+
+        <!-- Exporters & Pytest Gate -->
+        <div class="sub-box" style="flex:1; background:#F5F3FF; border-color:#DDD6FE;">
+          <div class="sub-title" style="color:#4C1D95;">C. Pytest Gate &amp; Telemetry Exporters</div>
+          <div style="background:#4C1D95; color:#FFFFFF; padding:5px 8px; border-radius:4px; font-family:'SF Mono', monospace; font-size:8.8px; font-weight:700;">
+            @assert_agent_governance(min_tdi=0.85)
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:2px;">
+            <div style="background:#FFFFFF; border:1px solid #C4B5FD; border-radius:4px; padding:5px; text-align:center;">
+              <div style="font-size:8.5px; font-weight:700; color:#5B21B6; font-family:'SF Mono', monospace;">OTLP JSON</div>
+              <div style="font-size:7.8px; color:#64748B;">Jaeger / Arize</div>
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #C4B5FD; border-radius:4px; padding:5px; text-align:center;">
+              <div style="font-size:8.5px; font-weight:700; color:#5B21B6; font-family:'SF Mono', monospace;">JSONL Log</div>
+              <div style="font-size:7.8px; color:#64748B;">Audit Trail</div>
+            </div>
+            <div style="background:#FFFFFF; border:1px solid #C4B5FD; border-radius:4px; padding:5px; text-align:center;">
+              <div style="font-size:8.5px; font-weight:700; color:#5B21B6; font-family:'SF Mono', monospace;">HTML Exec</div>
+              <div style="font-size:7.8px; color:#64748B;">Dashboard</div>
+            </div>
+          </div>
+          <div style="font-size:9px; color:#047857; font-weight:700; margin-top:auto;">
+            &#x2714; Blocks PR Merge on TDI or ECRT Regression
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer Legend -->
+  <div class="footer">
+    <div class="legend">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#F59E0B;"></div>
+        <span>1. Non-Invasive Agent &amp; MCP Ingress</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#10B981;"></div>
+        <span>2. Entropy-Gated Edge/Cloud FinOps Router</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#3B82F6;"></div>
+        <span>3. Streaming Circuit Breaker &amp; Stateful MCP</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#4C1D95;"></div>
+        <span>4. Statistical CI/CD Gate (TDI, SPRT, ECRT)</span>
+      </div>
+    </div>
+    <div>
+      <b>Promptly Broken Research</b> &bull; Aegis Agent Governance Framework (<code>aegis-agent-governance</code>)
+    </div>
+  </div>
+
+</body>
+</html>
+

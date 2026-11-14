@@ -156,3 +156,58 @@ async def test_governed_mcp_session_proxy():
     assert all(t.is_stateful for t in dag.mcp_transitions)
     assert all(t.context_token_overhead == 32 for t in dag.mcp_transitions)
 
+
+def test_langgraph_callback_anthropic_and_langchain_usage_metadata():
+    """Verify LangGraphGovernanceCallback extracts Anthropic input_tokens/cache_read and AIMessage usage_metadata."""
+    cb = LangGraphGovernanceCallback()
+
+    # 1. Raw Anthropic usage dictionary (200 uncached + 800 cache_read = 1000 total prompt tokens, 50 output)
+    run_ant = cb.on_llm_start(
+        {"name": "claude-3-5-sonnet-20241022"},
+        ["Arbitrate disputed contract"],
+        metadata={"ls_model_name": "claude-3-5-sonnet-20241022"},
+    )
+    cb.on_llm_end(
+        {
+            "usage": {
+                "input_tokens": 200,
+                "cache_creation_input_tokens": 0,
+                "cache_read_input_tokens": 800,
+                "output_tokens": 50,
+            }
+        },
+        run_id=run_ant,
+    )
+
+    # 2. Modern LangChain AIMessage.usage_metadata object
+    class FakeAIMessage:
+        usage_metadata = {
+            "input_tokens": 1000,
+            "output_tokens": 50,
+            "total_tokens": 1050,
+            "input_token_details": {"cache_read": 800},
+        }
+
+    run_lc = cb.on_llm_start(
+        {"name": "gpt-4o"},
+        ["Evaluate SLA breach"],
+        metadata={"ls_model_name": "gpt-4o"},
+    )
+    cb.on_llm_end(FakeAIMessage(), run_id=run_lc)
+
+    dag = cb.tracer.get_trajectory()
+    assert len(dag.spans) == 2
+
+    ant_span = dag.spans[0]
+    assert ant_span.prompt_tokens == 1000
+    assert ant_span.completion_tokens == 50
+    assert ant_span.attributes.get("cached_tokens") == 800
+    assert ant_span.cost_usd == pytest.approx(0.001590, abs=1e-7)
+
+    oai_span = dag.spans[1]
+    assert oai_span.prompt_tokens == 1000
+    assert oai_span.completion_tokens == 50
+    assert oai_span.attributes.get("cached_tokens") == 800
+    assert oai_span.cost_usd == pytest.approx(0.002000, abs=1e-7)
+
+

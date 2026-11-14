@@ -95,6 +95,34 @@ class PricingRegistry:
                 output_cost_per_million=12.00,
                 cached_input_cost_per_million=1.50,
             ),
+            ModelPricing(
+                model_name="o3-mini",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=1.10,
+                output_cost_per_million=4.40,
+                cached_input_cost_per_million=0.55,
+            ),
+            ModelPricing(
+                model_name="o3",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=2.00,
+                output_cost_per_million=8.00,
+                cached_input_cost_per_million=0.50,
+            ),
+            ModelPricing(
+                model_name="gpt-4.1",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=2.00,
+                output_cost_per_million=8.00,
+                cached_input_cost_per_million=0.50,
+            ),
+            ModelPricing(
+                model_name="gpt-4.1-mini",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=0.40,
+                output_cost_per_million=1.60,
+                cached_input_cost_per_million=0.10,
+            ),
             # Anthropic
             ModelPricing(
                 model_name="claude-3-5-sonnet-20241022",
@@ -102,6 +130,27 @@ class PricingRegistry:
                 input_cost_per_million=3.00,
                 output_cost_per_million=15.00,
                 cached_input_cost_per_million=0.30,
+            ),
+            ModelPricing(
+                model_name="claude-3-7-sonnet-latest",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=3.00,
+                output_cost_per_million=15.00,
+                cached_input_cost_per_million=0.30,
+            ),
+            ModelPricing(
+                model_name="claude-sonnet-4-20250514",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=3.00,
+                output_cost_per_million=15.00,
+                cached_input_cost_per_million=0.30,
+            ),
+            ModelPricing(
+                model_name="claude-opus-4-20250514",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=15.00,
+                output_cost_per_million=75.00,
+                cached_input_cost_per_million=1.50,
             ),
             ModelPricing(
                 model_name="claude-3-5-haiku-20241022",
@@ -128,6 +177,20 @@ class PricingRegistry:
                 tier=ModelTier.FRONTIER_CLOUD,
                 input_cost_per_million=0.10,
                 output_cost_per_million=0.40,
+            ),
+            ModelPricing(
+                model_name="gemini-3.8-flash",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=0.15,
+                output_cost_per_million=0.60,
+                cached_input_cost_per_million=0.0375,
+            ),
+            ModelPricing(
+                model_name="gemini-flash-lite-latest",
+                tier=ModelTier.FRONTIER_CLOUD,
+                input_cost_per_million=0.075,
+                output_cost_per_million=0.30,
+                cached_input_cost_per_million=0.01875,
             ),
             # Apple Silicon Local Models (MLX) - e.g. M3/M4 Max active 30W, $3000 CapEx amortized over 3 yrs
             ModelPricing(

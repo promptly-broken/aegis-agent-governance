@@ -42,15 +42,21 @@ class SpanContext:
         self.start_time_ms = 0.0
         self.prompt_tokens = 0
         self.completion_tokens = 0
+        self.cached_prompt_tokens = 0
         self.ttft_ms: Optional[float] = None
         self.attributes: Dict[str, Any] = {}
         self.error: Optional[str] = None
         self._ctx_token: Optional[contextvars.Token[Tuple[str, ...]]] = None
 
-    def record_tokens(self, prompt_tokens: int, completion_tokens: int) -> None:
+    def record_tokens(
+        self, prompt_tokens: int, completion_tokens: int, cached_prompt_tokens: int = 0
+    ) -> None:
         """Update token counts for this span."""
         self.prompt_tokens += prompt_tokens
         self.completion_tokens += completion_tokens
+        self.cached_prompt_tokens += cached_prompt_tokens
+        if self.cached_prompt_tokens > 0:
+            self.attributes["cached_tokens"] = self.cached_prompt_tokens
 
     def set_attribute(self, key: str, value: Any) -> None:
         """Add custom metadata attribute."""
@@ -81,10 +87,12 @@ class SpanContext:
         if self.tracer.pricing_registry and self.model_name:
             pricing = self.tracer.pricing_registry.get(self.model_name)
             if pricing:
+                cached = self.cached_prompt_tokens or int(self.attributes.get("cached_tokens", 0))
                 cost_usd = pricing.compute_cost(
                     prompt_tokens=self.prompt_tokens,
                     completion_tokens=self.completion_tokens,
                     duration_ms=max(0.0, end_time_ms - self.start_time_ms),
+                    cached_prompt_tokens=cached,
                 )
 
         span = Span(
@@ -220,8 +228,14 @@ class AegisTracer:
         ttft_ms: Optional[float] = None,
         attributes: Optional[Dict[str, Any]] = None,
         parent_span_id: Optional[str] = None,
+        cached_prompt_tokens: int = 0,
     ) -> Span:
         """Record a single LLM inference call with automatic pricing resolution."""
+        attrs = dict(attributes) if attributes else {}
+        cached = cached_prompt_tokens or int(attrs.get("cached_tokens", 0))
+        if cached > 0:
+            attrs["cached_tokens"] = cached
+
         pricing = self.pricing_registry.get(model_name)
         tier = model_tier or (pricing.tier if pricing else ModelTier.FRONTIER_CLOUD)
         cost_usd = 0.0
@@ -230,6 +244,7 @@ class AegisTracer:
                 prompt_tokens=prompt_tokens,
                 completion_tokens=completion_tokens,
                 duration_ms=duration_ms,
+                cached_prompt_tokens=cached,
             )
 
         now_ms = time.time() * 1000.0
@@ -247,7 +262,7 @@ class AegisTracer:
             prompt_tokens=prompt_tokens,
             completion_tokens=completion_tokens,
             cost_usd=cost_usd,
-            attributes=attributes or {},
+            attributes=attrs,
         )
         self.trajectory.add_span(span)
 

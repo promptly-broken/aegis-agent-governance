@@ -42,3 +42,8 @@ junit.xml
 .idea/
 .DS_Store
 .github/
+.env
+.env.*
+
+
+

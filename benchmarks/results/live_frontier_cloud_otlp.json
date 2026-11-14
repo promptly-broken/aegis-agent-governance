@@ -1,0 +1,2166 @@
+{
+  "resourceSpans": [
+    {
+      "resource": {
+        "attributes": [
+          {
+            "key": "service.name",
+            "value": {
+              "stringValue": "aegis-live-frontier-cloud-smoke"
+            }
+          },
+          {
+            "key": "service.version",
+            "value": {
+              "stringValue": "0.1.0"
+            }
+          },
+          {
+            "key": "aegis.governance.tdi",
+            "value": {
+              "doubleValue": 1.0
+            }
+          },
+          {
+            "key": "aegis.governance.is_deterministic",
+            "value": {
+              "boolValue": true
+            }
+          },
+          {
+            "key": "aegis.finops.ecrt_usd",
+            "value": {
+              "doubleValue": 5e-06
+            }
+          },
+          {
+            "key": "aegis.finops.resolution_rate",
+            "value": {
+              "doubleValue": 1.0
+            }
+          }
+        ]
+      },
+      "scopeSpans": [
+        {
+          "scope": {
+            "name": "aegis.telemetry.tracer",
+            "version": "0.1.0"
+          },
+          "spans": [
+            {
+              "traceId": "8d8850ad43f7df406cb4dfa1ab60b74a",
+              "spanId": "390fae2dbad37b99",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_gemini_smoke",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878471606272",
+              "endTimeUnixNano": "1794638879285506048",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_cloud_rollout_1"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "8d8850ad43f7df406cb4dfa1ab60b74a",
+              "spanId": "514d803d5a60464b",
+              "parentSpanId": "390fae2dbad37b99",
+              "name": "gemini_cloud_inference_1",
+              "kind": 3,
+              "startTimeUnixNano": "1794638878471606272",
+              "endTimeUnixNano": "1794638879285506048",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "20"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "13"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "gemini-flash-lite-latest"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "frontier_cloud"
+                  }
+                },
+                {
+                  "key": "aegis.attr.provider",
+                  "value": {
+                    "stringValue": "gemini"
+                  }
+                },
+                {
+                  "key": "aegis.attr.source",
+                  "value": {
+                    "stringValue": "cloud_live"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "8d8850ad43f7df406cb4dfa1ab60b74a",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "390fae2dbad37b99",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878471606272",
+              "endTimeUnixNano": "1794638878483606272",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "8d8850ad43f7df406cb4dfa1ab60b74a",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "390fae2dbad37b99",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878471606272",
+              "endTimeUnixNano": "1794638878483606272",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "8d8850ad43f7df406cb4dfa1ab60b74a",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "390fae2dbad37b99",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878471606272",
+              "endTimeUnixNano": "1794638878483606272",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c6786cd8b22080fa1e515bf24764eed9",
+              "spanId": "f4170d028c81e550",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_gemini_smoke",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472018176",
+              "endTimeUnixNano": "1794638879285917952",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_cloud_rollout_2"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c6786cd8b22080fa1e515bf24764eed9",
+              "spanId": "7338e7bfaca94da9",
+              "parentSpanId": "f4170d028c81e550",
+              "name": "gemini_cloud_inference_2",
+              "kind": 3,
+              "startTimeUnixNano": "1794638878472018176",
+              "endTimeUnixNano": "1794638879285917952",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "20"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "13"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "gemini-flash-lite-latest"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "frontier_cloud"
+                  }
+                },
+                {
+                  "key": "aegis.attr.provider",
+                  "value": {
+                    "stringValue": "gemini"
+                  }
+                },
+                {
+                  "key": "aegis.attr.source",
+                  "value": {
+                    "stringValue": "cloud_live"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c6786cd8b22080fa1e515bf24764eed9",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "f4170d028c81e550",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472018176",
+              "endTimeUnixNano": "1794638878484018176",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c6786cd8b22080fa1e515bf24764eed9",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "f4170d028c81e550",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472018176",
+              "endTimeUnixNano": "1794638878484018176",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c6786cd8b22080fa1e515bf24764eed9",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "f4170d028c81e550",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472018176",
+              "endTimeUnixNano": "1794638878484018176",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "37666fc7809553789cbd5cd479f7f0f7",
+              "spanId": "90c61a8300300701",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_gemini_smoke",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472204032",
+              "endTimeUnixNano": "1794638879286104064",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_cloud_rollout_3"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "37666fc7809553789cbd5cd479f7f0f7",
+              "spanId": "437d51bb3ed04516",
+              "parentSpanId": "90c61a8300300701",
+              "name": "gemini_cloud_inference_3",
+              "kind": 3,
+              "startTimeUnixNano": "1794638878472204032",
+              "endTimeUnixNano": "1794638879286104064",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "20"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "13"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "gemini-flash-lite-latest"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "frontier_cloud"
+                  }
+                },
+                {
+                  "key": "aegis.attr.provider",
+                  "value": {
+                    "stringValue": "gemini"
+                  }
+                },
+                {
+                  "key": "aegis.attr.source",
+                  "value": {
+                    "stringValue": "cloud_live"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "37666fc7809553789cbd5cd479f7f0f7",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "90c61a8300300701",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472204032",
+              "endTimeUnixNano": "1794638878484204032",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "37666fc7809553789cbd5cd479f7f0f7",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "90c61a8300300701",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472204032",
+              "endTimeUnixNano": "1794638878484204032",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "37666fc7809553789cbd5cd479f7f0f7",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "90c61a8300300701",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472204032",
+              "endTimeUnixNano": "1794638878484204032",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ce2dffa8f33e76a96a9aea873f38466b",
+              "spanId": "dc019cc1c3ff6a54",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_gemini_smoke",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472360192",
+              "endTimeUnixNano": "1794638879286259968",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_cloud_rollout_4"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ce2dffa8f33e76a96a9aea873f38466b",
+              "spanId": "88443d7506744a92",
+              "parentSpanId": "dc019cc1c3ff6a54",
+              "name": "gemini_cloud_inference_4",
+              "kind": 3,
+              "startTimeUnixNano": "1794638878472360192",
+              "endTimeUnixNano": "1794638879286259968",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "20"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "13"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "gemini-flash-lite-latest"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "frontier_cloud"
+                  }
+                },
+                {
+                  "key": "aegis.attr.provider",
+                  "value": {
+                    "stringValue": "gemini"
+                  }
+                },
+                {
+                  "key": "aegis.attr.source",
+                  "value": {
+                    "stringValue": "cloud_live"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ce2dffa8f33e76a96a9aea873f38466b",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "dc019cc1c3ff6a54",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472360192",
+              "endTimeUnixNano": "1794638878484360192",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ce2dffa8f33e76a96a9aea873f38466b",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "dc019cc1c3ff6a54",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472360192",
+              "endTimeUnixNano": "1794638878484360192",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "ce2dffa8f33e76a96a9aea873f38466b",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "dc019cc1c3ff6a54",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878472360192",
+              "endTimeUnixNano": "1794638878484360192",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "137057c6de7e689ea49cf09261a382bf",
+              "spanId": "149e7ce8840fb21e",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_gemini_smoke",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878473852160",
+              "endTimeUnixNano": "1794638879287751936",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_cloud_rollout_5"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "137057c6de7e689ea49cf09261a382bf",
+              "spanId": "d7d97a1fea94499d",
+              "parentSpanId": "149e7ce8840fb21e",
+              "name": "gemini_cloud_inference_5",
+              "kind": 3,
+              "startTimeUnixNano": "1794638878473852160",
+              "endTimeUnixNano": "1794638879287751936",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "llm_inference"
+                  }
+                },
+                {
+                  "key": "aegis.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_gemini_smoke"
+                  }
+                },
+                {
+                  "key": "aegis.cost_usd",
+                  "value": {
+                    "doubleValue": 5.4e-06
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.input_tokens",
+                  "value": {
+                    "intValue": "20"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.output_tokens",
+                  "value": {
+                    "intValue": "13"
+                  }
+                },
+                {
+                  "key": "gen_ai.usage.total_tokens",
+                  "value": {
+                    "intValue": "33"
+                  }
+                },
+                {
+                  "key": "gen_ai.request.model",
+                  "value": {
+                    "stringValue": "gemini-flash-lite-latest"
+                  }
+                },
+                {
+                  "key": "aegis.model_tier",
+                  "value": {
+                    "stringValue": "frontier_cloud"
+                  }
+                },
+                {
+                  "key": "aegis.attr.provider",
+                  "value": {
+                    "stringValue": "gemini"
+                  }
+                },
+                {
+                  "key": "aegis.attr.source",
+                  "value": {
+                    "stringValue": "cloud_live"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "137057c6de7e689ea49cf09261a382bf",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "149e7ce8840fb21e",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878473852160",
+              "endTimeUnixNano": "1794638878485852160",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"customer_id\": \"CUST-104\", \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "customer_id,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "137057c6de7e689ea49cf09261a382bf",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "149e7ce8840fb21e",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878473852160",
+              "endTimeUnixNano": "1794638878485852160",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\", \"tracking_number\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier,tracking_number"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "137057c6de7e689ea49cf09261a382bf",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "149e7ce8840fb21e",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1794638878473852160",
+              "endTimeUnixNano": "1794638878485852160",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amount_usd\": 149.99, \"order_id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amount_usd,order_id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "89ff78227088da57687945a75a85123f",
+              "spanId": "1ef1656f6151e229",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_stochastic_baseline",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000000999936",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_stochastic_1"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_stochastic_baseline"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "89ff78227088da57687945a75a85123f",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "1ef1656f6151e229",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"order\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "order"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "89ff78227088da57687945a75a85123f",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "1ef1656f6151e229",
+              "name": "tool:merchant_escalation",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "merchant_escalation"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"reason\": \"lost\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "reason"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05b684db7b5258191c8137fe7f46f04a",
+              "spanId": "96e8163c365b35d3",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_stochastic_baseline",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000000999936",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_stochastic_2"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_stochastic_baseline"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05b684db7b5258191c8137fe7f46f04a",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "96e8163c365b35d3",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"trk\": \"TRK-77189\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "trk"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "05b684db7b5258191c8137fe7f46f04a",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "96e8163c365b35d3",
+              "name": "tool:send_apology_coupon",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "send_apology_coupon"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"code\": \"SORRY20\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "code"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2159bea6c7a46a317866a5b272503616",
+              "spanId": "dcfa265255461e36",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_stochastic_baseline",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000000999936",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_stochastic_3"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_stochastic_baseline"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2159bea6c7a46a317866a5b272503616",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "dcfa265255461e36",
+              "name": "tool:warehouse_inventory_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "warehouse_inventory_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"sku\": \"SKU-1\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "sku"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "2159bea6c7a46a317866a5b272503616",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "dcfa265255461e36",
+              "name": "tool:issue_customer_refund",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "issue_customer_refund"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"amt\": 149.99}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "amt"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "66c3e49edb26d87514cfe48ac043fdc2",
+              "spanId": "3759176347cd8ef6",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_stochastic_baseline",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000000999936",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_stochastic_4"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_stochastic_baseline"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "3"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "66c3e49edb26d87514cfe48ac043fdc2",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "3759176347cd8ef6",
+              "name": "tool:dispute_policy_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "dispute_policy_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"policy\": \"P402\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "policy"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "66c3e49edb26d87514cfe48ac043fdc2",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "3759176347cd8ef6",
+              "name": "tool:order_lookup",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "order_lookup"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"id\": \"ORD-99824\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "id"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "66c3e49edb26d87514cfe48ac043fdc2",
+              "spanId": "5e45a7e8e37b3382",
+              "parentSpanId": "3759176347cd8ef6",
+              "name": "tool:merchant_escalation",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "merchant_escalation"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"urgent\": true}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "urgent"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c71d8875f11552b91a2c418acb55e9eb",
+              "spanId": "f2c84690602c5f8c",
+              "parentSpanId": "",
+              "name": "trajectory:live_frontier_cloud_stochastic_baseline",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000000999936",
+              "attributes": [
+                {
+                  "key": "aegis.trajectory.id",
+                  "value": {
+                    "stringValue": "live_gemini_stochastic_5"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.scenario_id",
+                  "value": {
+                    "stringValue": "live_frontier_cloud_stochastic_baseline"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.resolved",
+                  "value": {
+                    "boolValue": true
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_tokens",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.total_cost_usd",
+                  "value": {
+                    "intValue": "0"
+                  }
+                },
+                {
+                  "key": "aegis.trajectory.tool_count",
+                  "value": {
+                    "intValue": "2"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c71d8875f11552b91a2c418acb55e9eb",
+              "spanId": "1067f0e6b692edfe",
+              "parentSpanId": "f2c84690602c5f8c",
+              "name": "tool:send_apology_coupon",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "send_apology_coupon"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"discount\": 15}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "discount"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            },
+            {
+              "traceId": "c71d8875f11552b91a2c418acb55e9eb",
+              "spanId": "130639832f61839a",
+              "parentSpanId": "f2c84690602c5f8c",
+              "name": "tool:tracking_status",
+              "kind": 1,
+              "startTimeUnixNano": "1700000000000000000",
+              "endTimeUnixNano": "1700000000012000000",
+              "attributes": [
+                {
+                  "key": "aegis.span_type",
+                  "value": {
+                    "stringValue": "tool_node"
+                  }
+                },
+                {
+                  "key": "tool.name",
+                  "value": {
+                    "stringValue": "tracking_status"
+                  }
+                },
+                {
+                  "key": "tool.parameters",
+                  "value": {
+                    "stringValue": "{\"carrier\": \"FedEx\"}"
+                  }
+                },
+                {
+                  "key": "tool.schema_keys",
+                  "value": {
+                    "stringValue": "carrier"
+                  }
+                },
+                {
+                  "key": "tool.status",
+                  "value": {
+                    "stringValue": "success"
+                  }
+                },
+                {
+                  "key": "aegis.depends_on",
+                  "value": {
+                    "stringValue": "step_1"
+                  }
+                }
+              ],
+              "status": {
+                "code": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

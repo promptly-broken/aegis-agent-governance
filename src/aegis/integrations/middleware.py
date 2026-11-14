@@ -192,14 +192,61 @@ class LangGraphGovernanceCallback:
 
         prompt_tokens = 0
         completion_tokens = 0
+        cached_tokens = 0
+
+        usage: Dict[str, Any] = {}
         if isinstance(response, dict):
-            usage = response.get("token_usage") or response.get("usage") or {}
-            prompt_tokens = int(usage.get("prompt_tokens", 0))
-            completion_tokens = int(usage.get("completion_tokens", 0))
+            usage = (
+                response.get("token_usage")
+                or response.get("usage")
+                or response.get("usage_metadata")
+                or {}
+            )
+        elif hasattr(response, "usage_metadata") and isinstance(response.usage_metadata, dict):
+            usage = response.usage_metadata
         elif hasattr(response, "llm_output") and isinstance(response.llm_output, dict):
-            usage = response.llm_output.get("token_usage", {})
-            prompt_tokens = int(usage.get("prompt_tokens", 0))
-            completion_tokens = int(usage.get("completion_tokens", 0))
+            usage = (
+                response.llm_output.get("token_usage")
+                or response.llm_output.get("usage")
+                or {}
+            )
+
+        if not usage and hasattr(response, "generations"):
+            try:
+                gens = getattr(response, "generations")
+                if gens and gens[0] and hasattr(gens[0][0], "message"):
+                    msg = gens[0][0].message
+                    if hasattr(msg, "usage_metadata") and isinstance(msg.usage_metadata, dict):
+                        usage = msg.usage_metadata
+                    elif hasattr(msg, "response_metadata") and isinstance(msg.response_metadata, dict):
+                        usage = (
+                            msg.response_metadata.get("token_usage")
+                            or msg.response_metadata.get("usage")
+                            or {}
+                        )
+            except Exception:
+                pass
+
+        if isinstance(usage, dict) and usage:
+            if "prompt_tokens" in usage or "completion_tokens" in usage:
+                prompt_tokens = int(usage.get("prompt_tokens", 0) or 0)
+                completion_tokens = int(usage.get("completion_tokens", 0) or 0)
+                p_details = usage.get("prompt_tokens_details")
+                if isinstance(p_details, dict):
+                    cached_tokens = int(p_details.get("cached_tokens", 0) or 0)
+            elif "input_tokens" in usage or "output_tokens" in usage:
+                in_toks = int(usage.get("input_tokens", 0) or 0)
+                completion_tokens = int(usage.get("output_tokens", 0) or 0)
+                if "cache_read_input_tokens" in usage or "cache_creation_input_tokens" in usage:
+                    cache_read = int(usage.get("cache_read_input_tokens", 0) or 0)
+                    cache_create = int(usage.get("cache_creation_input_tokens", 0) or 0)
+                    cached_tokens = cache_read
+                    prompt_tokens = in_toks + cache_read + cache_create
+                else:
+                    prompt_tokens = in_toks
+                    in_details = usage.get("input_token_details")
+                    if isinstance(in_details, dict):
+                        cached_tokens = int(in_details.get("cache_read", 0) or 0)
 
         if prompt_tokens == 0 and info and info.get("prompt_text"):
             prompt_tokens = max(1, len(info["prompt_text"].split()))
@@ -213,6 +260,7 @@ class LangGraphGovernanceCallback:
             completion_tokens=completion_tokens,
             duration_ms=round(duration_ms, 3),
             model_tier=decision.selected_tier if decision else None,
+            cached_prompt_tokens=cached_tokens,
             attributes={
                 "recommended_tier": decision.selected_tier.value if decision else "unknown",
                 "recommended_model": decision.recommended_model if decision else model_name,

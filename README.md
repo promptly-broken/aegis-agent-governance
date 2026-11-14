@@ -9,6 +9,13 @@
 
 Repository: `https://github.com/promptly-broken/aegis-agent-governance`
 
+![Aegis Agent Governance System Architecture](docs/architecture_diagram.svg)
+
+> **Architecture & Empirical Benchmark Assets:**
+> - [System Architecture Vector Diagram (`docs/architecture_diagram.svg`)](docs/architecture_diagram.svg) | [Interactive HTML Diagram (`docs/architecture_diagram.html`)](docs/architecture_diagram.html)
+> - [Live Apple M5 Pro (48 GB) Benchmark Report (`benchmarks/results/live_apple_silicon_m5_pro_report.md`)](benchmarks/results/live_apple_silicon_m5_pro_report.md)
+> - [Live Frontier Cloud & Wire-Contract Verification Report (`benchmarks/results/live_frontier_cloud_smoke_report.md`)](benchmarks/results/live_frontier_cloud_smoke_report.md)
+
 ---
 
 ## Key Pillars
@@ -169,7 +176,7 @@ uv run python examples/live_governed_agent.py
 ### Running the Test Suite
 
 ```bash
-# Run all 84 comprehensive unit and property tests
+# Run all 94 comprehensive unit, wire-contract, and live verification tests
 uv run pytest -v
 
 # Run with test coverage
